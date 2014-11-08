@@ -1,0 +1,698 @@
+# Russian translations for Sanaviron package.
+# Copyright (C) 2011 THE SANAVIRON COPYRIGHT HOLDER
+# This file is distributed under the same license as the Sanaviron package.
+# Ivlev Denis <ivlevdenis.ru@gmail.com>, 2011, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-25 12:47-0300\n"
+"PO-Revision-Date: 2012-06-24 20:33+0400\n"
+"Last-Translator: Ivlev Denis <ivlevdenis.ru@gmail.com>\n"
+"Language-Team: русский <>\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: ../ui/stock.py:19
+msgid "Center"
+msgstr "Центр"
+
+#: ../ui/stock.py:20
+msgid "Center horizontally"
+msgstr "Центрировать по горизонтали"
+
+#: ../ui/stock.py:21
+msgid "Center vertically"
+msgstr "Центрировать по вертикали"
+
+#: ../ui/stock.py:22
+msgid "Align to east"
+msgstr "Выровнять по правому краю"
+
+#: ../ui/stock.py:23
+msgid "Align to northeast"
+msgstr "Выровнять по правому верхнему углу"
+
+#: ../ui/stock.py:24
+msgid "Align to north"
+msgstr "Выровнять по верху"
+
+#: ../ui/stock.py:25
+msgid "Align to south"
+msgstr "Выровнять по низу"
+
+#: ../ui/stock.py:26
+msgid "Align to northwest"
+msgstr "Выровнять по верхнему левому углу"
+
+#: ../ui/stock.py:27
+msgid "Align to southeast"
+msgstr "Выровнять по правому нижнему углу"
+
+#: ../ui/stock.py:28
+msgid "Align to southwest"
+msgstr "Выровнять по левому нижнему углу"
+
+#: ../ui/stock.py:29
+msgid "Align to west"
+msgstr "Выровнять по левому краю"
+
+#: ../ui/stock.py:30
+msgid "Center in paper"
+msgstr "По центру страницы"
+
+#: ../ui/stock.py:31
+msgid "Center horizontally in paper"
+msgstr "По горизонтальному центру страницы"
+
+#: ../ui/stock.py:32
+msgid "Center vertically in paper"
+msgstr "По вертикальному центру страницы"
+
+#: ../ui/stock.py:33
+msgid "Align to east of paper"
+msgstr "Выровнять по правому краю страницы"
+
+#: ../ui/stock.py:34
+msgid "Align to northeast of paper"
+msgstr "Выровнять по верхнему правому краю страницы"
+
+#: ../ui/stock.py:35
+msgid "Align to north of paper"
+msgstr "Выровнять по верху страницы"
+
+#: ../ui/stock.py:36
+msgid "Align to sourth of paper"
+msgstr "Выровнять по низу страницы"
+
+#: ../ui/stock.py:37
+msgid "Align to northwest of paper"
+msgstr "Выровнять по верхнему левому краю страницы"
+
+#: ../ui/stock.py:38
+msgid "Align to southeast of paper"
+msgstr "Выровнять по нижнему правому краю страницы"
+
+#: ../ui/stock.py:39
+msgid "Align to southwest of paper"
+msgstr "Выровнять по нижнему левому краю страницы"
+
+#: ../ui/stock.py:40
+msgid "Align to west of paper"
+msgstr "Выровнять по левому краю страницы"
+
+#: ../ui/stock.py:41
+msgid "Bring to front"
+msgstr "Поднять"
+
+#: ../ui/stock.py:42
+msgid "Bring to back"
+msgstr "Опустить"
+
+#: ../ui/stock.py:43
+msgid "Box"
+msgstr "Прямоугольник"
+
+#: ../ui/stock.py:44 ../ui/properties.py:359
+msgid "Image"
+msgstr "Изображение"
+
+#: ../ui/stock.py:45
+msgid "Line"
+msgstr "Линия"
+
+#: ../ui/stock.py:46
+msgid "Arc"
+msgstr "Эллипс"
+
+#: ../ui/stock.py:47
+msgid "Curve"
+msgstr "Кривая"
+
+#: ../ui/stock.py:48
+msgid "Flex"
+msgstr "Шнур"
+
+#: ../ui/stock.py:49
+msgid "Rounded box"
+msgstr "Закруглёный прямоугольник"
+
+#: ../ui/stock.py:50
+msgid "Bubble"
+msgstr "Сноска"
+
+#: ../ui/stock.py:51 ../ui/properties.py:238
+msgid "Text"
+msgstr "Текст"
+
+#: ../ui/stock.py:52 ../ui/properties.py:333
+msgid "Barcode"
+msgstr "Штрихкод"
+
+#: ../ui/stock.py:53
+msgid "Table"
+msgstr "Таблица"
+
+#: ../ui/stock.py:54 ../ui/properties.py:419
+msgid "Chart"
+msgstr "Диаграмма"
+
+#: ../ui/stock.py:55
+msgid "Group"
+msgstr "Группировать"
+
+#: ../ui/stock.py:56
+msgid "Ungroup"
+msgstr "Разгруппировать"
+
+#: ../ui/stock.py:57
+msgid "Axis"
+msgstr "Оси"
+
+#: ../ui/stock.py:58
+msgid "Grid"
+msgstr "Сетка"
+
+#: ../ui/stock.py:59 ../ui/properties.py:216 ../ui/button.py:117
+msgid "Enable snap"
+msgstr "Прилипание"
+
+#: ../ui/stock.py:60
+msgid "Disable snap"
+msgstr "Отключить прилипание"
+
+#: ../ui/stock.py:61 ../ui/properties.py:207 ../ui/button.py:107
+msgid "Show margins"
+msgstr "Поля"
+
+#: ../ui/stock.py:62
+msgid "Hide margins"
+msgstr "Скрыть поля"
+
+#: ../ui/stock.py:63
+msgid "Continuous line"
+msgstr "Непрерывная линия"
+
+#: ../ui/stock.py:64
+msgid "Dotted line"
+msgstr "Путнктирная линия"
+
+#: ../ui/stock.py:65
+msgid "Dashed line"
+msgstr "Путнктирная линия"
+
+#: ../ui/stock.py:66
+msgid "Axis line"
+msgstr "Осевая линия"
+
+#: ../ui/stock.py:67
+msgid "Export to PDF"
+msgstr "Экспорт в PDF"
+
+#: ../ui/browser.py:122
+msgid "Portable browser"
+msgstr "Браузер"
+
+#: ../ui/properties.py:73
+msgid "Position"
+msgstr "Позиция"
+
+#: ../ui/properties.py:76
+msgid "Horizontal"
+msgstr "По горизонтали"
+
+#: ../ui/properties.py:79 ../sanaviron.py:248
+msgid "Vertical"
+msgstr "По вертикали"
+
+#: ../ui/properties.py:87 ../ui/properties.py:253
+msgid "Angle"
+msgstr "Угол"
+
+#: ../ui/properties.py:90 ../ui/properties.py:255
+msgid "Start Angle"
+msgstr "Начальный угол"
+
+#: ../ui/properties.py:93 ../ui/properties.py:259
+msgid "Stop Angle"
+msgstr "Конечный угол"
+
+#: ../ui/properties.py:101 ../ui/properties.py:177 ../ui/properties.py:280
+msgid "Size"
+msgstr "Размер"
+
+#: ../ui/properties.py:104 ../ui/properties.py:180
+msgid "Width"
+msgstr "Ширина"
+
+#: ../ui/properties.py:107 ../ui/properties.py:183
+msgid "Height"
+msgstr "Высота"
+
+#: ../ui/properties.py:115 ../ui/properties.py:302
+msgid "Color"
+msgstr "Цвет"
+
+#: ../ui/properties.py:119 ../ui/properties.py:305
+msgid "Stroke"
+msgstr "Обводка"
+
+#: ../ui/properties.py:123 ../ui/properties.py:308
+msgid "Fill"
+msgstr "Заливка"
+
+#: ../ui/properties.py:145
+msgid "General properties"
+msgstr "Общие свойства"
+
+#: ../ui/properties.py:151
+msgid "Units"
+msgstr "Единицы измерения"
+
+#: ../ui/properties.py:160
+msgid "Default linear unit"
+msgstr "Линейные ед.изм. по умолчанию"
+
+#: ../ui/properties.py:167
+msgid "Default angular unit"
+msgstr "Угловые ед.изм. по умолчанию"
+
+#: ../ui/properties.py:171 ../ui/button.py:51
+msgid "Document properties"
+msgstr "Свойства документа"
+
+#: ../ui/properties.py:185
+msgid "Margins"
+msgstr "Поля"
+
+#: ../ui/properties.py:188
+msgid "Top"
+msgstr "Верх"
+
+#: ../ui/properties.py:191
+msgid "Bottom"
+msgstr "Низ"
+
+#: ../ui/properties.py:194
+msgid "Left"
+msgstr "Левый"
+
+#: ../ui/properties.py:197
+msgid "Right"
+msgstr "Правый"
+
+#: ../ui/properties.py:199
+msgid "Config"
+msgstr "Настройка"
+
+#: ../ui/properties.py:202
+msgid "Grid size"
+msgstr "Размер сетки"
+
+#: ../ui/properties.py:205
+msgid "Guides size"
+msgstr "Размер направляющей"
+
+#: ../ui/properties.py:210
+msgid "Show guides"
+msgstr "Направляющие"
+
+#: ../ui/properties.py:213 ../ui/button.py:114
+msgid "Show grid"
+msgstr "Сетка"
+
+#: ../ui/properties.py:221
+msgid "Text properties"
+msgstr "Свойства текста"
+
+#: ../ui/properties.py:228 ../ui/properties.py:310 ../ui/menu.py:169
+msgid "Format"
+msgstr "Формат"
+
+#: ../ui/properties.py:232 ../ui/properties.py:314
+msgid "Font"
+msgstr "Шрифт"
+
+#: ../ui/properties.py:234
+msgid "Preserve aspect"
+msgstr "Сохранять пропорции"
+
+#: ../ui/properties.py:246
+msgid "Arc properties"
+msgstr "Свойства эллипса"
+
+#: ../ui/properties.py:262
+msgid "Other"
+msgstr "Другое"
+
+#: ../ui/properties.py:264
+msgid "Closed Arc"
+msgstr "Закрыть эллипс"
+
+#: ../ui/properties.py:268
+msgid "Closed Arc at Centre"
+msgstr "Закрыть в центр"
+
+#: ../ui/properties.py:273
+msgid "Table properties"
+msgstr "Свойства таблицы"
+
+#: ../ui/properties.py:290 ../ui/properties.py:316
+msgid "Columns"
+msgstr "Столбцы"
+
+#: ../ui/properties.py:300
+msgid "Rows"
+msgstr "Строки"
+
+#: ../ui/properties.py:326
+msgid "Barcode properties"
+msgstr "Свойства штрихкода"
+
+#: ../ui/properties.py:339 ../ui/properties.py:425
+msgid "Type"
+msgstr "Тип"
+
+#: ../ui/properties.py:343
+msgid "Code"
+msgstr "Код"
+
+#: ../ui/properties.py:352
+msgid "Image properties"
+msgstr "Свойства изображения"
+
+#: ../ui/properties.py:408
+msgid "Image file"
+msgstr "Файл изображения"
+
+#: ../ui/properties.py:412
+msgid "Chart properties"
+msgstr "Свойства диаграммы"
+
+#: ../ui/properties.py:474
+#, python-format
+msgid "Column %d"
+msgstr "Столбец %d"
+
+#: ../ui/properties.py:617
+msgid "Properties panel"
+msgstr "Панель свойств"
+
+#: ../ui/pager.py:78
+#, python-format
+msgid "Page %d of %d"
+msgstr "Страница %d из %d"
+
+#: ../ui/layer_selector.py:12
+msgid "Layer:"
+msgstr "Слой:"
+
+#: ../ui/layer_selector.py:21
+msgid "All"
+msgstr "Все"
+
+#: ../ui/layer_selector.py:22
+msgid "layer-1"
+msgstr "1й слой"
+
+#: ../ui/layer_selector.py:23
+msgid "layer-2"
+msgstr "2й слой"
+
+#: ../ui/layer_selector.py:24
+msgid "layer-3"
+msgstr "3й слой"
+
+#: ../ui/layer_selector.py:25
+msgid "layer-4"
+msgstr "4й слой"
+
+#: ../ui/layer_selector.py:35
+msgid "Layer selector"
+msgstr "Выбор активного слоя"
+
+#: ../ui/menu.py:23
+msgid "File"
+msgstr "Файл"
+
+#: ../ui/menu.py:62
+msgid "Export"
+msgstr "Экспорт"
+
+#: ../ui/menu.py:78
+msgid "Edit"
+msgstr "Правка"
+
+#: ../ui/menu.py:116
+msgid "Insert"
+msgstr "Вставить"
+
+#: ../ui/menu.py:185
+msgid "Tools"
+msgstr "Инструменты"
+
+#: ../ui/menu.py:334
+msgid "Window"
+msgstr "Окно"
+
+#: ../ui/menu.py:343
+msgid "Help"
+msgstr "Помощь"
+
+#: ../ui/button.py:45
+msgid "Expander button"
+msgstr "Кнопка расширителя"
+
+#: ../ui/button.py:60
+msgid "Top margin:"
+msgstr "Верхнее поле:"
+
+#: ../ui/button.py:68
+msgid "Bottom margin:"
+msgstr "Нижнее поле:"
+
+#: ../ui/button.py:76
+msgid "Left margin:"
+msgstr "Левое поле:"
+
+#: ../ui/button.py:84
+msgid "Right margin:"
+msgstr "Правое поле:"
+
+#: ../ui/button.py:92
+msgid "Grid size:"
+msgstr "Размер сетки:"
+
+#: ../ui/button.py:100
+msgid "Axis size:"
+msgstr "Размер осей:"
+
+#: ../ui/button.py:111
+msgid "Show axis"
+msgstr "Показывать оси"
+
+#: ../ui/button.py:121
+msgid "Object properties"
+msgstr "Свойства объекта"
+
+#: ../ui/button.py:146
+msgid "Width:"
+msgstr "Ширина:"
+
+#: ../ui/button.py:154
+msgid "Height:"
+msgstr "Высота:"
+
+#: ../ui/button.py:162
+msgid "Border color:"
+msgstr "Цвет границы:"
+
+#: ../ui/button.py:170
+msgid "Fill color:"
+msgstr "Цвет заливки:"
+
+#: ../ui/button.py:178
+msgid "Text:"
+msgstr "Текст:"
+
+#: ../ui/button.py:186
+msgid "Font:"
+msgstr "Шрифт"
+
+#: ../objects/canvas.py:817
+msgid "Test canvas"
+msgstr "Тест холста"
+
+#: ../objects/table.py:11 ../sanaviron.py:407
+msgid "Column 1"
+msgstr "Столбец 1"
+
+#: ../objects/__init__.py:36
+msgid "cm"
+msgstr "см"
+
+#: ../objects/__init__.py:37
+msgid "mm"
+msgstr "мм"
+
+#: ../objects/__init__.py:38
+msgid "dots"
+msgstr "точка"
+
+#: ../objects/__init__.py:39
+msgid "inches"
+msgstr "дюймы"
+
+#: ../objects/__init__.py:40
+msgid "rad"
+msgstr "рад"
+
+#: ../objects/__init__.py:41
+msgid "deg"
+msgstr "град"
+
+#: ../objects/barcode.py:51
+msgid "Choose best-fit"
+msgstr ""
+
+#: ../objects/barcode.py:52
+#, fuzzy
+msgid "Code EAN"
+msgstr "Код"
+
+#: ../objects/barcode.py:53
+msgid "UPC"
+msgstr ""
+
+#: ../objects/barcode.py:54
+msgid "ISBN"
+msgstr ""
+
+#: ../objects/barcode.py:55
+#, fuzzy
+msgid "Code 39"
+msgstr "Код"
+
+#: ../objects/barcode.py:56
+#, fuzzy
+msgid "Code 128"
+msgstr "Код"
+
+#: ../objects/barcode.py:57
+#, fuzzy
+msgid "Code 128C"
+msgstr "Код"
+
+#: ../objects/barcode.py:58
+#, fuzzy
+msgid "Code 128B"
+msgstr "Код"
+
+#: ../objects/barcode.py:59
+msgid "Interleaved 2 of 5"
+msgstr ""
+
+#: ../objects/barcode.py:60
+msgid "Raw code 128"
+msgstr ""
+
+#: ../objects/barcode.py:61
+msgid "Codabar"
+msgstr ""
+
+#: ../objects/barcode.py:62
+msgid "MSI"
+msgstr ""
+
+#: ../objects/barcode.py:63
+msgid "Plessey"
+msgstr ""
+
+#: ../objects/barcode.py:64
+#, fuzzy
+msgid "Code 93"
+msgstr "Код"
+
+#: ../objects/text.py:11
+msgid "enter text here"
+msgstr "введите текст"
+
+#: ../sanaviron.py:38
+msgid "Document designer"
+msgstr "Конструктор документов"
+
+#: ../sanaviron.py:115
+msgid "Edit mode"
+msgstr "Режим редактирования"
+
+#: ../sanaviron.py:118
+msgid "Design view"
+msgstr "Общий вид"
+
+#: ../sanaviron.py:125
+msgid "XML view"
+msgstr "XML вид"
+
+#: ../sanaviron.py:153
+msgid "Open document"
+msgstr "Открыть документ"
+
+#: ../sanaviron.py:164 ../sanaviron.py:209
+msgid "XML files"
+msgstr "XML файлы"
+
+#: ../sanaviron.py:170 ../sanaviron.py:215 ../sanaviron.py:284
+msgid "All files"
+msgstr "Все файлы"
+
+#: ../sanaviron.py:198
+msgid "Save document as"
+msgstr "Сохранить как.."
+
+#: ../sanaviron.py:252
+msgid "Landscape"
+msgstr "По горизонтали"
+
+#: ../sanaviron.py:267
+msgid "Save PDF file as"
+msgstr "Сохранить в PDF.."
+
+#: ../sanaviron.py:278
+msgid "PDF files"
+msgstr "PDF файлы"
+
+#: ../sanaviron.py:333
+msgid ""
+"A program to design reports, invoices, documents, labels and more. Based on "
+"the 2D drawing engine \"sanaviron\"."
+msgstr "Программа распространяется \"как есть\", под лицензией LGPL 2.1."
+
+#: ../sanaviron.py:335
+msgid "Unofficial project site at Google"
+msgstr "Неофициальная страница на Google Code"
+
+#: ../sanaviron.py:336
+msgid ""
+"Este programa se distribuye como está bajo la Licencia General y Pública "
+"para Bibliotecas LGPL 2.1."
+msgstr ""
+
+#: ../sanaviron.py:339
+msgid "Undocumented yet :'("
+msgstr ""
+
+#: ../sanaviron.py:341
+msgid "(Spanish)"
+msgstr "(Испанский)"
+
+#: ../sanaviron.py:341
+msgid "(Russian)"
+msgstr "(Русский)"
+
+#: ../sanaviron.py:394
+msgid "Insert text here"
+msgstr "Введите текст"

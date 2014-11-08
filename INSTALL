@@ -1,0 +1,21 @@
+Downloading
+-----------
+For Windows:
+    Download and install Python 2.7 from http://www.python.org/ftp/python/2.7.3/python-2.7.3.msi
+    Download and install GTK+ 2.24 from http://ftp.gnome.org/pub/GNOME/binaries/win32/pygtk/2.24/pygtk-all-in-one-2.24.2.win32-py2.7.msi
+
+Instalation
+-----------
+
+For Ubuntu:
+    With the PIP:
+
+        sudo pip install sanaviron-*.tar.gz
+
+    Without PIP:
+
+        Unpack archive - tar xvfz sanaviron-*.tar.gz
+
+        Go to the folder sanaviron-* - cd sanaviron-*
+
+        And run the installation script - sudo python setup.py install

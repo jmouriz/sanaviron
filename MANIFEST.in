@@ -1,0 +1,5 @@
+graft doc/help
+prune sanaviron/images
+prune sanaviron/examples
+prune *.py[c,o]
+prune *.*~

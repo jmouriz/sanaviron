@@ -1,0 +1,15 @@
+########### PyCha Documentation #####################
+
+PyCha documentation is created using Sphinx.
+http://sphinx.pocoo.org/
+
+The files are marked up using reStructedText. To
+compile the documentation into html, run:
+
+make html
+
+The default build directory is .build/html.
+
+Other default make options are contained in Makefile.
+
+Please send corrections to aprzywecki@gmail.com

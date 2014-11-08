@@ -1,0 +1,658 @@
+2012-08-22  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add MANIFEST.in template.
+
+2012-08-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Cursor fix and other things.
+
+2012-08-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Delete fonts folder because is not used.
+
+2012-08-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Split Canvas in BaseCanvas/Canvas/ExtendedCanvas/TestingCanvas 
+      and put things in their places.
+
+2012-08-21  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Added installation script.
+
+2012-08-21  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * 
+2012-08-20  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Some i18n improvements.
+
+2012-08-20  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add --debug flag.
+
+2012-08-20  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2012-08-20  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Move some method from Application to Canvas.
+
+2012-08-20  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add center-on-paper-horizontally feature but don't make sense 
+      margins.
+
+2012-08-19  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Small refactoring directories to create installation packages in 
+      the future.
+
+2012-08-18  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Z-order done.
+
+2012-08-18  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * More z-order work.
+
+2012-08-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minor changes.
+
+2012-08-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Delete more unused files.
+
+2012-08-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add key bindings.
+      Add z-order.
+      Implement select-all function.
+      Renamed flex by connector.
+      Renamed axis by guides.
+      Renamed default by preferred in properties.
+      Deleted unused files.
+
+2012-08-15  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Disable GTK threads initialization on Windows.
+
+2012-07-14  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Code project has been completely reduced to the standard PEP8, 
+      were fixed minor bugs.
+
+2012-03-22  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2012-02-17  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2012-02-17  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Add zoom with mouse wheel and fix bugs with zoom, remove cursors 
+      and add system stock cursors.
+
+2012-02-06  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Fixed bugs in the ellipse
+
+2012-02-06  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Fixed bugs in the ellipse
+
+2012-02-03  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2012-02-03  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2012-02-01  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2012-02-01  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2011-11-30  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Closed arcs properties checkboxes behavior and some other 
+      minimal changes.
+
+2011-11-29  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Completed yet ellipse. There remains a small problem to set 
+      angle with the controls.
+
+2011-11-29  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Has made some changes: colour management of filling and a 
+      contour of objects now in parent class, speed of operation at the expense of 
+      plotting of some objects without antialiasing is increased.
+
+2011-11-25  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Application is now a Singleton
+
+2011-11-25  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add update rule to i18n/Makefile in order to update messages 
+      catalogs. Translate barcodes.
+
+2011-11-25  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Translate commets.
+
+2011-11-09  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * The project structure is changed. Classes of graphic objects are 
+      carried out in separate files. The interface of the user also is carried out in 
+      a separate packet.
+
+2011-11-09  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2011-11-09  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2011-11-09  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2011-11-08  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2011-11-08  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * no log
+
+2011-10-24  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minimal i18n change.
+
+2011-10-24  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add compiled i18n files.
+
+2011-10-23  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * The class a gradient is added in a test mode. Launch the editor 
+      from the terminal a command ./editor.py --debug also add object a circle what 
+      to see graduated fill. Fix some errors.
+
+2011-10-23  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Fix Russian translation
+
+2011-10-23  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Fix curve and flex drawing bug.
+
+2011-10-23  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Updated spanish translation.
+
+2011-10-22  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Translation into Russian is added.
+
+2011-10-22  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * More exact management of circle is made. 
+      Possibility of closing of a contour of a circle is added. The 
+      64х bit barkode library is added. Changes are made To the module barkode for 
+      an automatic choice of library, depending on architecture of system. Has 
+      changed the e-mail in dialogue about the program :)
+
+2011-10-22  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Bring to front/back stock icons, menu and toolbar.
+
+2011-10-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Renamed Entry by LinearEntry, AngleEntry by AngularEntry and 
+      added Entry class. Inherits AngularEntry and LinearEntry from Entry. Added z 
+      value to Point. Added units.py.
+
+2011-10-21  Denis Ivlev  <ivlevdenis.ru@gmail.com>
+
+    * Added control of the circle. Added Control Panel circle.
+
+2011-10-18  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2011-10-17  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2011-10-17  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Translated UI into english
+
+2011-10-14  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Commit some Denis changes
+
+2011-10-14  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2011-10-14  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add arc object from Ivlev Denis. Add some internationalization 
+      issues.
+
+2010-05-12  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2010-05-12  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2010-05-12  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2010-05-12  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2010-05-12  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Init C translation
+
+2010-05-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2010-05-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Template implementations
+
+2010-05-07  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add dtd
+
+2010-05-06  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Make singleton cursor.
+
+2010-05-06  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Some modules renamed. Bug fixed. Egg plan added.
+
+2010-04-23  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Some fixes.
+
+2010-04-22  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Multiple-pages 1st test.
+
+2010-04-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Cut & Paste fix.
+
+2010-04-20  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Added copy & paste support.
+
+2010-04-20  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Disabled mozilla support. Added labels templates from glabels.
+
+2010-04-18  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * 
+2010-04-17  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Trivial change.
+
+2010-04-15  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Two minor bugs fixed
+
+2010-04-15  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Code clean
+
+2010-04-13  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Simple scale factor suppont (zoom).
+
+2010-04-10  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Implements table control points. Add some development files.
+
+2010-04-09  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * New example file.
+
+2010-04-09  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minor change.
+
+2010-04-09  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Implements "open" and "save as" operations.
+
+2010-04-08  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Some imprvements on table columns.
+
+2010-04-06  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Update text property when select object in the canvas.
+
+2010-04-05  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add new no-functional SQL editor widget.
+
+2010-04-05  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Some table improvements.
+
+2010-04-03  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Added new columns editor widget.
+
+2010-04-03  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * New semi-functional table object and bug fixes.
+
+2010-04-02  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Remame LEAME.txt to README.txt
+
+2010-04-02  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Include autogenerated files to use with Win32 and some other 
+      platforms without make and sed tools.
+
+2010-04-02  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Exclude autogenerated files.
+
+2010-04-02  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Trivial change.
+
+2010-04-02  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Include PyCha in source tree to run without install.
+
+2010-04-02  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minor change.
+
+2010-04-02  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add new ntification widget.
+      Add new layer selector widget.
+
+2010-04-02  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add new zoom widget.
+      Add barcode binaries for machines without compiler.
+      Properties bug fixed.
+      Add new ruler widget.
+
+2010-04-02  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Bug fixes and some improvements.
+
+2010-03-31  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Include PyCha like 3rd part.
+
+2010-03-31  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add statics chart support.
+      Add README.txt file.
+      Some objects improvements.
+
+2010-03-31  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Some bug fixes and improvements.
+
+2010-03-24  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Deleting wiki page WikiChartInterface.
+
+2009-06-27  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Edited wiki page through web user interface.
+
+2009-06-27  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Created wiki page through web user interface.
+
+2009-06-22  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Stethical changes.
+
+2009-06-22  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minor changes.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Win32 barcode minimal change.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Icon generator.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Barcode description dictionary. Barcode type and code property.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Wiki removed.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Fixed accidental file destroy.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Created wiki page through web user interface.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Edited wiki page through web user interface.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Created wiki page through web user interface.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Another icon!
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * The icon!
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Cleanup
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * New barcode stock icon.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Edited wiki page through web user interface.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Created wiki page through web user interface.
+
+2009-06-21  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Full barcode vectorial drawing. Table improvements.
+
+2009-06-20  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * BarCode support.
+
+2009-06-19  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * New paginator widget.
+
+2009-06-19  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Don't remember, see diff in SVN.
+
+2009-06-18  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Major changes:
+      Add flex (conector) object.
+      Image size fixed.
+      Performance issues.
+      Widget exposition support.
+      More functional actions on menu and tool bars.
+
+2009-06-18  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Now text property is a TextPad.
+
+2009-06-18  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Nigthly work.
+
+2009-06-17  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minor changes.
+
+2009-06-17  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Nightly work o full PDF export support.
+
+2009-06-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * New MenuItem and STOCK for 'Export to PDF' operation. Fixed 
+      partially canvas visibility issue (#?).
+
+2009-06-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Deselect objects before export.
+
+2009-06-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Remove wiki unused folder.
+
+2009-06-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Fixed pango context creation in text object.
+
+2009-06-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minor fix.
+
+2009-06-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * New method: Canvas.save_to_pdf()
+
+2009-06-16  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * A TextPad added.
+
+2009-06-13  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Edited wiki page through web user interface.
+
+2009-06-13  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Created wiki page through web user interface.
+
+2009-06-13  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Created wiki page through web user interface.
+
+2009-06-13  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Edited wiki page through web user interface.
+
+2009-06-13  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Created wiki page through web user interface.
+
+2009-06-12  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minor changes.
+
+2009-06-12  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minor change.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Add cursor.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Final cursors folder change.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Fix change.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Cursors folder cleanup.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Cursors update.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * More on cursors.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * New example file.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * More example images.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Minor changes and some example images.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Implement new cursors set.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * New cursors.
+
+2009-06-11  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Start work on serialize holder in order to save.
+      Start work on fix browser.
+
+2009-06-09  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Removed win32con module dependency.
+      Removed exposition of initial document example.
+
+2009-06-08  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Exported preserve text property. Delete trivial comments.
+
+2009-06-07  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Fixed cursor "hot spot" offset.
+
+2009-06-07  Juan Manuel Mouriz  <jmouriz@gmail.com>
+
+    * Initial import.

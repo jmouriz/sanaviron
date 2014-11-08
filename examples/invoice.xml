@@ -1,0 +1,355 @@
+<document page="1">
+    <object type="BarCode">
+        <property name="code" type="str" value="800894002700"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="height" type="float" value="60"/>
+        <property name="width" type="float" value="315"/>
+        <property name="y" type="float" value="525"/>
+        <property name="x" type="float" value="420"/>
+        <property name="z" type="int" value="0"/>
+        <property name="type" type="int" value="4"/>
+    </object>
+    <object type="Image">
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="image" type="unicode" value="images/logo.png"/>
+        <property name="height" type="float" value="104"/>
+        <property name="width" type="float" value="104"/>
+        <property name="y" type="float" value="0"/>
+        <property name="x" type="float" value="0"/>
+        <property name="z" type="int" value="0"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Nombre del cliente"/>
+        <property name="height" type="float" value="31"/>
+        <property name="width" type="float" value="236"/>
+        <property name="y" type="float" value="0"/>
+        <property name="x" type="float" value="112"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="18"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Abonado 0000000000"/>
+        <property name="height" type="float" value="21"/>
+        <property name="width" type="float" value="190"/>
+        <property name="y" type="float" value="60"/>
+        <property name="x" type="float" value="555"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="12"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Calle Número Cuerpo Piso Departamento"/>
+        <property name="height" type="float" value="17"/>
+        <property name="width" type="float" value="278"/>
+        <property name="y" type="float" value="32"/>
+        <property name="x" type="float" value="112"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="10"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="(0000) Localidad, Provincia"/>
+        <property name="height" type="float" value="17"/>
+        <property name="width" type="float" value="192"/>
+        <property name="y" type="float" value="48"/>
+        <property name="x" type="float" value="112"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="10"/>
+    </object>
+    <object type="Rounded">
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="height" type="float" value="48"/>
+        <property name="width" type="float" value="280"/>
+        <property name="radius" type="int" value="10"/>
+        <property name="y" type="float" value="0"/>
+        <property name="x" type="float" value="464"/>
+        <property name="z" type="int" value="0"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Total a pagar:"/>
+        <property name="height" type="float" value="23"/>
+        <property name="width" type="float" value="136"/>
+        <property name="y" type="float" value="0"/>
+        <property name="x" type="float" value="472"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="14"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="0,00"/>
+        <property name="height" type="float" value="23"/>
+        <property name="width" type="float" value="43"/>
+        <property name="y" type="float" value="0"/>
+        <property name="x" type="float" value="624"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="14"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Vencimiento:"/>
+        <property name="height" type="float" value="23"/>
+        <property name="width" type="float" value="127"/>
+        <property name="y" type="float" value="24"/>
+        <property name="x" type="float" value="472"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="14"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="00/00/0000"/>
+        <property name="height" type="float" value="23"/>
+        <property name="width" type="float" value="116"/>
+        <property name="y" type="float" value="24"/>
+        <property name="x" type="float" value="624"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="14"/>
+    </object>
+    <object type="Rounded">
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="height" type="float" value="328"/>
+        <property name="width" type="float" value="195"/>
+        <property name="radius" type="int" value="10"/>
+        <property name="y" type="float" value="176"/>
+        <property name="x" type="float" value="0"/>
+        <property name="z" type="int" value="0"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Resumen de cuenta"/>
+        <property name="height" type="float" value="27"/>
+        <property name="width" type="float" value="219"/>
+        <property name="y" type="float" value="112"/>
+        <property name="x" type="float" value="248"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="16"/>
+    </object>
+    <object type="Rounded">
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="height" type="float" value="30"/>
+        <property name="width" type="float" value="744"/>
+        <property name="radius" type="int" value="10"/>
+        <property name="y" type="float" value="112"/>
+        <property name="x" type="float" value="0"/>
+        <property name="z" type="int" value="0"/>
+    </object>
+    <object type="Line">
+        <property name="arrow-width" type="int" value="12"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="height" type="float" value="0"/>
+        <property name="arrow-tip-length" type="int" value="16"/>
+        <property name="width" type="float" value="195"/>
+        <property name="y" type="float" value="208"/>
+        <property name="x" type="float" value="0"/>
+        <property name="z" type="int" value="0"/>
+        <property name="arrow-length" type="int" value="32"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Información"/>
+        <property name="height" type="float" value="27"/>
+        <property name="width" type="float" value="126"/>
+        <property name="y" type="float" value="176"/>
+        <property name="x" type="float" value="24"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="16"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Adherite al débito directo
+ para abonar tu factura. Comunicate con nosotros con tu número de cuenta bancaria
+ y CBU."/>
+        <property name="height" type="float" value="102"/>
+        <property name="width" type="float" value="168"/>
+        <property name="y" type="float" value="224"/>
+        <property name="x" type="float" value="8"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="10"/>
+    </object>
+    <object type="Rounded">
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="height" type="float" value="30"/>
+        <property name="width" type="float" value="536"/>
+        <property name="radius" type="int" value="10"/>
+        <property name="y" type="float" value="176"/>
+        <property name="x" type="float" value="208"/>
+        <property name="z" type="int" value="0"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Concepto"/>
+        <property name="height" type="float" value="23"/>
+        <property name="width" type="float" value="89"/>
+        <property name="y" type="float" value="176"/>
+        <property name="x" type="float" value="224"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="14"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Período"/>
+        <property name="height" type="float" value="23"/>
+        <property name="width" type="float" value="72"/>
+        <property name="y" type="float" value="176"/>
+        <property name="x" type="float" value="560"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="14"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Importe"/>
+        <property name="height" type="float" value="23"/>
+        <property name="width" type="float" value="76"/>
+        <property name="y" type="float" value="176"/>
+        <property name="x" type="float" value="656"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="14"/>
+    </object>
+    <object type="Rounded">
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="height" type="float" value="30"/>
+        <property name="width" type="float" value="536"/>
+        <property name="radius" type="int" value="10"/>
+        <property name="y" type="float" value="472"/>
+        <property name="x" type="float" value="208"/>
+        <property name="z" type="int" value="0"/>
+    </object>
+    <object type="Table">
+        <property name="rows" type="int" value="9"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="height" type="float" value="243"/>
+        <property name="font" type="unicode" value="Verdana Bold 13"/>
+        <property name="width" type="float" value="520"/>
+        <property name="titles" type="unicode" value="Concepto:Período:0,00"/>
+        <property name="y" type="float" value="217"/>
+        <property name="x" type="float" value="224"/>
+        <property name="z" type="int" value="0"/>
+        <property name="columns" type="unicode" value="330:120:60"/>
+        <property name="size" type="int" value="16"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Total a pagar"/>
+        <property name="height" type="float" value="27"/>
+        <property name="width" type="float" value="141"/>
+        <property name="y" type="float" value="472"/>
+        <property name="x" type="float" value="224"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="16"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="0,00"/>
+        <property name="height" type="float" value="27"/>
+        <property name="width" type="float" value="47"/>
+        <property name="y" type="float" value="472"/>
+        <property name="x" type="float" value="656"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="16"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Cupón de pago abierto"/>
+        <property name="height" type="float" value="14"/>
+        <property name="width" type="float" value="131"/>
+        <property name="y" type="float" value="528"/>
+        <property name="x" type="float" value="8"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="8"/>
+    </object>
+    <object type="Text">
+        <property name="preserve" type="bool" value="True"/>
+        <property name="foreground" type="str" value="#000"/>
+        <property name="font" type="unicode" value="Verdana"/>
+        <property name="fill_color" type="objects.color.Color" value="3f3f3f3f"/>
+        <property name="stroke_color" type="objects.color.Color" value="3f3f3fff"/>
+        <property name="text" type="unicode" value="Ver detalle al dorso Cupón
+ válido sólo para el número de referencia de pago que se indica. No modifique este
+ cupón para pagos de otras cuentas."/>
+        <property name="height" type="float" value="33"/>
+        <property name="width" type="float" value="288"/>
+        <property name="y" type="float" value="544"/>
+        <property name="x" type="float" value="8"/>
+        <property name="z" type="int" value="0"/>
+        <property name="size" type="int" value="6"/>
+    </object>
+</document>

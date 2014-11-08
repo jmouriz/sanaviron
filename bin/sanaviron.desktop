@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Sanaviron
+GenericName=Document designer
+GenericName[ru]=Конструктор документов
+GenericName[es]=Diseñador de documentos
+Comment=The Sanaviron Project is an 2D drawing engine fully written in Python for represent composite vector graphics.
+Exec=sanaviron
+Icon=sanaviron
+Terminal=sanaviron
+Type=Application
+Categories=Graphics;
