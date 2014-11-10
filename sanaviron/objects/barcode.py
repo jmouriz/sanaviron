@@ -60,21 +60,25 @@ barcodes = {
     _("QR"): QR
 }
 
-if platform.system() == "Windows":
-    extension = "dll"
-else:
-    extension = "so"
+file = os.path.join(os.path.dirname(__file__), "barcode", "barcode")
 
 if platform.machine() == "x86_64":
-    suffix = platform.machine() + "."
+    file += "." + platform.machine()
+	
+file += '.'
+
+if platform.system() == "Windows":
+    file += 'dll'
 else:
-    suffix = ""
+    file += 'so'
+	
+BCIface = CDLL(file)
 
-BCIface = CDLL(os.path.join(os.path.dirname(__file__), "barcode", "barcode." + suffix + extension))
-
-BCIface.get_code_data.argtypes = (c_int, c_char_p, c_double, c_double)
 BCIface.get_code_data.restype = c_char_p
+BCIface.get_code_data.argtypes = (c_int, c_char_p, c_double, c_double)
+
 BCIface.get_text_data.restype = c_char_p
+BCIface.get_code_data.argtypes = (c_int, c_char_p)
 
 DEFAULT_CODE_TYPE = BARCODE_39
 
@@ -130,11 +134,11 @@ class BarCode(Object):
     def draw(self, context):
         #prepare code and get data
         context.save()
-        code = str(self.code)
+        code = bytes(self.code, 'utf-8')
         type = int(self.type)
-        data = BCIface.get_code_data(type, code, self.width, self.height)
+        data = BCIface.get_code_data(type, code, c_double(self.width), c_double(self.height))
         text = BCIface.get_text_data(type, code)
-
+		
         #if data empty then draw error message and exit
         if not data:
             context.rectangle(self.x, self.y, self.width, self.height)
@@ -167,13 +171,13 @@ class BarCode(Object):
         context.set_source_rgba(self.stroke_color.red, self.stroke_color.green,
                                 self.stroke_color.blue, self.stroke_color.alpha)
 
-        def decode_data_to_float(some_data):
-            return [float(x.replace(',', '.')) for x in some_data.split(":")]
+        def decode_data_to_float(data):
+            return [float(value.replace(',', '.')) for value in data.split(":")]
 
-        def decode_data_to_string(some_data):
-            return [str(x.replace(',', '.')) for x in some_data.split(":")]
+        def decode_data_to_string(data):
+            return [str(value.replace(',', '.')) for value in data.split(":")]
 
-        data = data.split(' ')
+        data = data.decode('utf-8').split(' ')
         ratio = float(data.pop().split(":")[0].replace(',', '.'))
 
         for bar in range(len(data)):
@@ -195,7 +199,7 @@ class BarCode(Object):
         height *= 2
 
         if text:
-            text = text.split(' ')
+            text = text.decode('utf-8').split(' ')
             for digit in range(len(text)):
                 if not len(text[digit]):
                     continue
