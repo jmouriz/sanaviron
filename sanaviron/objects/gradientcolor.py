@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from color import Color
+from .color import Color
 
 class GradientColor(Color):
     """This class represents a gradient color"""

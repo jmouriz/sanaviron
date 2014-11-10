@@ -12,7 +12,9 @@ __all__ = ['ALIGN_OBJECTS_CENTER_BOTH', 'ALIGN_OBJECTS_CENTER_HORIZONTAL', 'ALIG
            'UNGROUP', 'EXPAND_PROPERTIES', 'CONTRACT_PROPERTIES', 'SPLIT_HORIZONTALLY', 'SPLIT_VERTICALLY',
            'REMOVE_SPLIT', 'SET_BACKGROUND']
            
-import gtk
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GdkPixbuf
 
 def register(name, label, key):
     filename = "%s.png" % name
@@ -21,14 +23,14 @@ def register(name, label, key):
     filename = os.path.join(os.path.dirname(__file__), "stock", filename)
     domain = "sanaviron"
     id = "%s-stock-%s" % (domain, name)
-    pixbuf = gtk.gdk.pixbuf_new_from_file(filename)
-    iconset = gtk.IconSet(pixbuf)
-    factory = gtk.IconFactory()
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file(filename)
+    iconset = Gtk.IconSet(pixbuf)
+    factory = Gtk.IconFactory()
     factory.add(id, iconset)
     factory.add_default()
-    keyval = gtk.gdk.keyval_from_name(key)
-    modifier = gtk.gdk.MOD1_MASK
-    gtk.stock_add([(id, label, modifier, keyval, domain)])
+    keyval = Gdk.keyval_from_name(key)
+    modifier = Gdk.ModifierType.MOD1_MASK
+    #Gtk.stock_add([(id, label, modifier, keyval, domain)])
     return id
 
 ALIGN_OBJECTS_CENTER_BOTH = register("align-objects-center-both", _("Center"), "X")

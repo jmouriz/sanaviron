@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import gtk
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
+from gi.repository import GdkPixbuf
 import sys
 import os
+
+from .__init__ import singleton
 
 from sanaviron import VERSION, get_parsed_language, get_summary
 
@@ -21,15 +26,15 @@ from objects.text import Text
 from objects.shape import Shape
 from objects import HORIZONTAL, VERTICAL
 
-from menubar import MenuBar
-from toolbar import Toolbar
-from editor import Editor
-from statusbar import Statusbar
-from ui import INFORMATION, singleton
-from stock import *
+from .menubar import MenuBar
+from .stock import *
+from .menubar import MenuBar
+from .toolbar import Toolbar
+from .editor import Editor
+from .statusbar import Statusbar
 
 @singleton
-class Application(gtk.Window):
+class Application(Gtk.Window):
     """This class represents an application"""
 #    application = None
 #
@@ -43,7 +48,7 @@ class Application(gtk.Window):
 #
 #    def initialize(self):
     def __init__(self):
-        gtk.Window.__init__(self)
+        GObject.GObject.__init__(self)
         self.set_size_request(640, 480)
         self.set_default_size(1366, 768)
         #self.set_default_size(800, 600)
@@ -51,68 +56,68 @@ class Application(gtk.Window):
         self.maximize()
         self.connect("delete-event", self.quit)
 
-        self.bindings = gtk.AccelGroup()
+        self.bindings = Gtk.AccelGroup()
         self.add_accel_group(self.bindings)
 
-        self.setup = gtk.PageSetup()
-        self.settings = gtk.PrintSettings()
+        self.setup = Gtk.PageSetup()
+        self.settings = Gtk.PrintSettings()
 
         self.filename = None
         self.update_title()
 
-        icon = gtk.gdk.pixbuf_new_from_file(os.path.join(os.path.dirname(__file__), "..", "images", "canvas-logo.png"))
+        icon = GdkPixbuf.Pixbuf.new_from_file(os.path.join(os.path.dirname(__file__), "..", "images", "canvas-logo.png"))
         self.set_icon(icon)
 
-        vbox = gtk.VBox()
+        vbox = Gtk.VBox()
         self.add(vbox)
 
         self.menu = MenuBar(self)
-        vbox.pack_start(self.menu, False, False)
+        vbox.pack_start(self.menu, False, False, 0)
 
-        self.menu.append_menu("_" + _("File"))
-        self.menu.append_item(gtk.STOCK_NEW, "new", "<Control>N")
-        self.menu.append_item(gtk.STOCK_OPEN, "open", "<Control>O")
-        self.menu.append_item(gtk.STOCK_SAVE, "save", "<Control>S")
-        self.menu.append_item(gtk.STOCK_SAVE_AS, "save-as", "<Control><Shift>S")
+        self.menu.append_menu(_("File"))
+        self.menu.append_item(Gtk.STOCK_NEW, "new", "<Control>N")
+        self.menu.append_item(Gtk.STOCK_OPEN, "open", "<Control>O")
+        self.menu.append_item(Gtk.STOCK_SAVE, "save", "<Control>S")
+        self.menu.append_item(Gtk.STOCK_SAVE_AS, "save-as", "<Control><Shift>S")
         self.menu.append_separator()
-        self.menu.append_item(gtk.STOCK_PAGE_SETUP, "page-setup")
-        self.menu.append_item(gtk.STOCK_PRINT_PREVIEW, "print-preview", "<Control><Shift>P")
-        self.menu.append_item(gtk.STOCK_PRINT, "print", "<Control>P")
+        self.menu.append_item(Gtk.STOCK_PAGE_SETUP, "page-setup")
+        self.menu.append_item(Gtk.STOCK_PRINT_PREVIEW, "print-preview", "<Control><Shift>P")
+        self.menu.append_item(Gtk.STOCK_PRINT, "print", "<Control>P")
         self.menu.append_separator()
-        self.menu.append_menu("_" + _("Document"), True)
+        self.menu.append_menu(_("Document"), True)
         self.menu.append_item(SET_BACKGROUND, "set-background")
         self.menu.ascend()
         self.menu.append_separator()
-        self.menu.append_menu("_" + _("Export"), True)
+        self.menu.append_menu(_("Export"), True)
         self.menu.append_item(EXPORT_TO_PDF, "export-to-pdf")
         self.menu.ascend()
         self.menu.append_separator()
-        self.menu.append_item(gtk.STOCK_QUIT, "quit", "<Control>Q")
+        self.menu.append_item(Gtk.STOCK_QUIT, "quit", "<Control>Q")
 
-        self.menu.append_menu("_" + _("Edit"))
-        self.menu.append_item(gtk.STOCK_UNDO, "undo", "<Control>Z")
-        self.menu.append_item(gtk.STOCK_REDO, "redo", "<Control>Y")
+        self.menu.append_menu(_("Edit"))
+        self.menu.append_item(Gtk.STOCK_UNDO, "undo", "<Control>Z")
+        self.menu.append_item(Gtk.STOCK_REDO, "redo", "<Control>Y")
         self.menu.append_separator()
-        self.menu.append_item(gtk.STOCK_COPY, "copy", "<Control>C")
-        self.menu.append_item(gtk.STOCK_CUT, "cut", "<Control>X")
-        self.menu.append_item(gtk.STOCK_PASTE, "paste", "<Control>V")
+        self.menu.append_item(Gtk.STOCK_COPY, "copy", "<Control>C")
+        self.menu.append_item(Gtk.STOCK_CUT, "cut", "<Control>X")
+        self.menu.append_item(Gtk.STOCK_PASTE, "paste", "<Control>V")
         self.menu.append_separator()
-        self.menu.append_item(gtk.STOCK_DELETE, "delete", "Delete")
+        self.menu.append_item(Gtk.STOCK_DELETE, "delete", "Delete")
         self.menu.append_separator()
-        self.menu.append_item(gtk.STOCK_SELECT_ALL, "select-all", "<Control>A")
+        self.menu.append_item(Gtk.STOCK_SELECT_ALL, "select-all", "<Control>A")
 
-        self.menu.append_menu("_" + _("View"))
+        self.menu.append_menu(_("View"))
         self.menu.append_toggle(MARGINS_ENABLED, "margins")
         self.menu.append_toggle(GRID, "grid")
         self.menu.append_toggle(GUIDES, "guides")
         self.menu.append_toggle(SNAP_ENABLED, "snap")
         self.menu.append_toggle(_("Z-Order hint"), "hints", toggled = False)
         self.menu.append_separator()
-        self.menu.append_toggle(gtk.STOCK_PROPERTIES, "properties")
+        self.menu.append_toggle(Gtk.STOCK_PROPERTIES, "properties")
         self.menu.append_toggle(_("Menubar"), "menubar")
         self.menu.append_toggle(_("Statusbar"), "statusbar")
 
-        self.menu.append_menu("_" + _("Insert"))
+        self.menu.append_menu(_("Insert"))
         self.menu.append_item(LINE, "line")
         self.menu.append_item(ARC, "arc")
         self.menu.append_item(CURVE, "curve")
@@ -130,26 +135,26 @@ class Application(gtk.Window):
         self.menu.append_item(BARCODE, "barcode")
         self.menu.append_item(IMAGE, "image")
 
-        self.menu.append_menu("_" + _("Format"))
-        self.menu.append_item(gtk.STOCK_SELECT_FONT, "select-font")
+        self.menu.append_menu(_("Format"))
+        self.menu.append_item(Gtk.STOCK_SELECT_FONT, "select-font")
         self.menu.append_separator()
-        self.menu.append_item(gtk.STOCK_SELECT_COLOR, "select-color")
+        self.menu.append_item(Gtk.STOCK_SELECT_COLOR, "select-color")
 
-        self.menu.append_menu("_" + _("Tools"))
+        self.menu.append_menu(_("Tools"))
         self.menu.append_item(GROUP, "group", "<Control>G")
         self.menu.append_item(UNGROUP, "ungroup", "<Control><Shift>G")
         self.menu.append_separator()
         self.menu.append_item(BRING_TO_FRONT, "bring-to-front", "<Control>plus")
         self.menu.append_item(BRING_TO_BACK, "bring-to-back", "<Control>minus")
         self.menu.append_separator()
-        self.menu.append_menu("_" + _("Zoom"), True)
-        self.menu.append_item(gtk.STOCK_ZOOM_FIT, "zoom-fit", "<Control>0")
-        self.menu.append_item(gtk.STOCK_ZOOM_100, "zoom-100", "<Control>1")
-        self.menu.append_item(gtk.STOCK_ZOOM_IN, "zoom-in", "<Control><Shift>plus")
-        self.menu.append_item(gtk.STOCK_ZOOM_OUT, "zoom-out", "<Control><Shift>minus")
+        self.menu.append_menu(_("Zoom"), True)
+        self.menu.append_item(Gtk.STOCK_ZOOM_FIT, "zoom-fit", "<Control>0")
+        self.menu.append_item(Gtk.STOCK_ZOOM_100, "zoom-100", "<Control>1")
+        self.menu.append_item(Gtk.STOCK_ZOOM_IN, "zoom-in", "<Control><Shift>plus")
+        self.menu.append_item(Gtk.STOCK_ZOOM_OUT, "zoom-out", "<Control><Shift>minus")
         self.menu.ascend()
         self.menu.append_separator()
-        self.menu.append_menu("_" + _("Objects alignment"), True)
+        self.menu.append_menu(_("Objects alignment"), True)
         self.menu.append_item(ALIGN_OBJECTS_NORTHWEST, "align-objects-northwest")
         self.menu.append_item(ALIGN_OBJECTS_NORTH, "align-objects-north")
         self.menu.append_item(ALIGN_OBJECTS_NORTHEAST, "align-objects-northeast")
@@ -162,7 +167,7 @@ class Application(gtk.Window):
         self.menu.append_item(ALIGN_OBJECTS_CENTER_HORIZONTAL, "align-objects-center-horizontal")
         self.menu.append_item(ALIGN_OBJECTS_CENTER_VERTICAL, "align-objects-center-vertical")
         self.menu.ascend()
-        self.menu.append_menu("_" + _("Paper alignment"), True)
+        self.menu.append_menu(_("Paper alignment"), True)
         self.menu.append_item(ALIGN_PAPER_NORTHWEST, "align-paper-northwest")
         self.menu.append_item(ALIGN_PAPER_NORTH, "align-paper-north")
         self.menu.append_item(ALIGN_PAPER_NORTHEAST, "align-paper-northeast")
@@ -176,43 +181,43 @@ class Application(gtk.Window):
         self.menu.append_item(ALIGN_PAPER_CENTER_VERTICAL, "align-paper-center-vertical")
         self.menu.ascend()
 
-        self.menu.append_menu("_" + _("Window"))
-        self.menu.append_item(gtk.STOCK_FULLSCREEN, "fullscreen", "<Control>F")
+        self.menu.append_menu(_("Window"))
+        self.menu.append_item(Gtk.STOCK_FULLSCREEN, "fullscreen", "<Control>F")
 
-        self.menu.append_menu("_" + _("Help"), right=True)
-        self.menu.append_item(gtk.STOCK_HELP, "help", "F1")
+        self.menu.append_menu(_("Help"), right=True)
+        self.menu.append_item(Gtk.STOCK_HELP, "help", "F1")
         self.menu.append_separator()
-        self.menu.append_item(gtk.STOCK_ABOUT, "about")
+        self.menu.append_item(Gtk.STOCK_ABOUT, "about")
 
         self.menu.show_all()
 
         htoolbar = Toolbar(HORIZONTAL)
-        vbox.pack_start(htoolbar, False, False)
+        vbox.pack_start(htoolbar, False, False, 0)
 
-        htoolbar.append(gtk.STOCK_NEW, "new")
-        htoolbar.append(gtk.STOCK_OPEN, "open")
-        htoolbar.append(gtk.STOCK_SAVE, "save")
+        htoolbar.append(Gtk.STOCK_NEW, "new")
+        htoolbar.append(Gtk.STOCK_OPEN, "open")
+        htoolbar.append(Gtk.STOCK_SAVE, "save")
         htoolbar.append_separator()
-        htoolbar.append(gtk.STOCK_PRINT, "print")
+        htoolbar.append(Gtk.STOCK_PRINT, "print")
         htoolbar.append_separator()
-        htoolbar.append(gtk.STOCK_UNDO, "undo")
-        htoolbar.append(gtk.STOCK_REDO, "redo")
+        htoolbar.append(Gtk.STOCK_UNDO, "undo")
+        htoolbar.append(Gtk.STOCK_REDO, "redo")
         htoolbar.append_separator()
-        htoolbar.append(gtk.STOCK_CUT, "cut")
-        htoolbar.append(gtk.STOCK_COPY, "copy")
-        htoolbar.append(gtk.STOCK_PASTE, "paste")
+        htoolbar.append(Gtk.STOCK_CUT, "cut")
+        htoolbar.append(Gtk.STOCK_COPY, "copy")
+        htoolbar.append(Gtk.STOCK_PASTE, "paste")
         htoolbar.append_separator()
-        htoolbar.append(gtk.STOCK_DELETE, "delete")
+        htoolbar.append(Gtk.STOCK_DELETE, "delete")
         htoolbar.append_separator()
         htoolbar.append_with_submenu(LINE_STYLE_CONTINUOUS, "line-style-continuous")
         htoolbar.append_to_submenu(LINE_STYLE_POINT_DASH, "line-style-point-dash")
         htoolbar.append_to_submenu(LINE_STYLE_POINT, "line-style-point")
         htoolbar.append_to_submenu(LINE_STYLE_DASH, "line-style-dash")
         htoolbar.append_separator()
-        htoolbar.append_with_submenu(gtk.STOCK_ZOOM_FIT, "zoom-fit")
-        htoolbar.append_to_submenu(gtk.STOCK_ZOOM_100, "zoom-100")
-        htoolbar.append_to_submenu(gtk.STOCK_ZOOM_IN, "zoom-in")
-        htoolbar.append_to_submenu(gtk.STOCK_ZOOM_OUT, "zoom-out")
+        htoolbar.append_with_submenu(Gtk.STOCK_ZOOM_FIT, "zoom-fit")
+        htoolbar.append_to_submenu(Gtk.STOCK_ZOOM_100, "zoom-100")
+        htoolbar.append_to_submenu(Gtk.STOCK_ZOOM_IN, "zoom-in")
+        htoolbar.append_to_submenu(Gtk.STOCK_ZOOM_OUT, "zoom-out")
         htoolbar.append_separator()
         htoolbar.append_toggle(MARGINS_ENABLED, "margins")
         htoolbar.append_toggle(GRID, "grid")
@@ -249,14 +254,14 @@ class Application(gtk.Window):
         htoolbar.append_to_submenu(ALIGN_PAPER_CENTER_HORIZONTAL, "align-paper-center-horizontal")
         htoolbar.append_to_submenu(ALIGN_PAPER_CENTER_VERTICAL, "align-paper-center-vertical")
         htoolbar.append_separator()
-        htoolbar.append(gtk.STOCK_HELP, "help")
+        htoolbar.append(Gtk.STOCK_HELP, "help")
 
-        hbox = gtk.HBox()
+        hbox = Gtk.HBox()
         vbox.add(hbox)
 
         vtoolbar = Toolbar()
-        vtoolbar.set_style(gtk.TOOLBAR_ICONS)
-        hbox.pack_start(vtoolbar, False, False)
+        vtoolbar.set_style(Gtk.ToolbarStyle.ICONS)
+        hbox.pack_start(vtoolbar, False, False, 0)
 
         vtoolbar.append(LINE, "line")
         vtoolbar.append(ARC, "arc")
@@ -273,33 +278,33 @@ class Application(gtk.Window):
         vtoolbar.append(CHART, "chart")
         vtoolbar.append(IMAGE, "image")
 
-        notebook = gtk.Notebook()
+        notebook = Gtk.Notebook()
         notebook.set_show_tabs(True)
         notebook.set_show_border(False)
-        #notebook.set_tab_pos(gtk.POS_LEFT)
-        notebook.set_tab_pos(gtk.POS_RIGHT)
+        #notebook.set_tab_pos(Gtk.PositionType.LEFT)
+        notebook.set_tab_pos(Gtk.PositionType.RIGHT)
         hbox.add(notebook)
 
         self.status = Statusbar()
         self.id = self.status.get_context_id(_("Edit mode"))
-        vbox.pack_start(self.status, False, False)
+        vbox.pack_start(self.status, False, False, 0)
 
-        label = gtk.Label(_("Design view"))
+        label = Gtk.Label(label=_("Design view"))
         label.set_angle(90)
 
         self.editor = Editor(self)
         self.editor.set_paper()
         notebook.append_page(self.editor, label)
 
-        label = gtk.Label(_("XML view"))
+        label = Gtk.Label(label=_("XML view"))
         label.set_angle(90)
 
         def get_source_view():
-            source = gtk.ScrolledWindow()
-            source.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+            source = Gtk.ScrolledWindow()
+            source.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
 
-            view = gtk.TextView()
-            self.code = gtk.TextBuffer()
+            view = Gtk.TextView()
+            self.code = Gtk.TextBuffer()
             view.set_buffer(self.code)
             source.add(view)
 
@@ -408,7 +413,7 @@ class Application(gtk.Window):
 
     def run(self):
        self.show_all()
-       gtk.main()
+       Gtk.main()
 
     def update_title(self):
         document = self.filename if self.filename else _("New document")
@@ -423,7 +428,7 @@ class Application(gtk.Window):
 
     def switch(self, widget, child, page):
         document = self.editor.canvas.serialize()
-        self.code.set_text(document)
+        self.code.set_text(str(document))
 
     def key_handler(self, keyname):
         if keyname == "<Control><Shift>V":
@@ -438,15 +443,15 @@ class Application(gtk.Window):
 
     def key_press(self, widget, event):
         keyval = event.keyval
-        keyname = gtk.gdk.keyval_name(keyval)
-        if keyname.startswith('Control') or\
-           keyname.startswith('Shift') or\
-           keyname.startswith('Alt'):
+        keyname = Gdk.keyval_name(keyval)
+        if keyname and (keyname.startswith('Control') or \
+                        keyname.startswith('Shift') or \
+                        keyname.startswith('Alt')):
             return False
         keyname = keyname.capitalize()
-        if event.state & gtk.gdk.SHIFT_MASK:
+        if event.get_state() & Gdk.ModifierType.SHIFT_MASK:
             keyname = "<Shift>%s" % keyname
-        if event.state & gtk.gdk.CONTROL_MASK:
+        if event.get_state() & Gdk.ModifierType.CONTROL_MASK:
             keyname = "<Control>%s" % keyname
         self.key_handler(keyname)
         return False
@@ -471,30 +476,29 @@ class Application(gtk.Window):
 
     def open(self, widget, data):
         # XXX funcional
-        dialog = gtk.FileChooserDialog(title=_("Open document"),
+        dialog = Gtk.FileChooserDialog(title=_("Open document"),
             parent=self,
-            action=gtk.FILE_CHOOSER_ACTION_OPEN,
-            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
-                     gtk.STOCK_OK, gtk.RESPONSE_ACCEPT),
-            backend=None)
+            action=Gtk.FileChooserAction.OPEN,
+            buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                     Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
 
         dialog.set_transient_for(self)
-        dialog.set_default_response(gtk.RESPONSE_OK)
+        dialog.set_default_response(Gtk.ResponseType.OK)
 
-        filter = gtk.FileFilter()
+        filter = Gtk.FileFilter()
         filter.set_name(_("XML files"))
         filter.add_mime_type("document/xml")
         filter.add_pattern("*.xml")
         dialog.add_filter(filter)
 
-        filter = gtk.FileFilter()
+        filter = Gtk.FileFilter()
         filter.set_name(_("All files"))
         filter.add_pattern("*")
         dialog.add_filter(filter)
 
         response = dialog.run()
 
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             filename = dialog.get_filename()
             self.filename = filename
             if filename is not None:
@@ -508,38 +512,37 @@ class Application(gtk.Window):
             return
         current = self.editor.canvas.serialize()
         original = open(self.filename).read()
-        print original
-        print current
-        if original == current:
-            return
-        print "saving"
+        print(original)
+        print(current)
+        print("saving")
+        return
+        print("saving")
         #self.editor.canvas.save_to_xml(self.filename)
 
     def save_as(self, widget, data):
-        dialog = gtk.FileChooserDialog(title=_("Save document as"),
+        dialog = Gtk.FileChooserDialog(title=_("Save document as"),
             parent=self,
-            action=gtk.FILE_CHOOSER_ACTION_SAVE,
-            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
-                     gtk.STOCK_SAVE, gtk.RESPONSE_ACCEPT),
-            backend=None)
+            action=Gtk.FileChooserAction.SAVE,
+            buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                     Gtk.STOCK_SAVE, Gtk.ResponseType.ACCEPT))
 
         dialog.set_transient_for(self)
-        dialog.set_default_response(gtk.RESPONSE_ACCEPT)
+        dialog.set_default_response(Gtk.ResponseType.ACCEPT)
 
-        filter = gtk.FileFilter()
+        filter = Gtk.FileFilter()
         filter.set_name(_("XML files"))
         filter.add_mime_type("document/xml")
         filter.add_pattern("*.xml")
         dialog.add_filter(filter)
 
-        filter = gtk.FileFilter()
+        filter = Gtk.FileFilter()
         filter.set_name(_("All files"))
         filter.add_pattern("*")
         dialog.add_filter(filter)
 
         response = dialog.run()
 
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             filename = dialog.get_filename()
             self.filename = filename
             if filename is not None:
@@ -550,23 +553,23 @@ class Application(gtk.Window):
 
     def page_setup(self, widget, data):
         self.setup.settings = self.settings
-        self.setup = gtk.print_run_page_setup_dialog(self, self.setup, self.settings)
+        self.setup = Gtk.print_run_page_setup_dialog(self, self.setup, self.settings)
 
         size = self.setup.get_paper_size()
         orientation = self.setup.get_orientation()
 
         # TODO canvas->margins
         for page in self.editor.canvas.pages:
-            page.top = self.setup.get_top_margin(gtk.UNIT_POINTS)
-            page.left = self.setup.get_left_margin(gtk.UNIT_POINTS)
-            page.bottom = self.setup.get_bottom_margin(gtk.UNIT_POINTS)
-            page.right = self.setup.get_right_margin(gtk.UNIT_POINTS)
+            page.top = self.setup.get_top_margin(Gtk.UNIT_POINTS)
+            page.left = self.setup.get_left_margin(Gtk.UNIT_POINTS)
+            page.bottom = self.setup.get_bottom_margin(Gtk.UNIT_POINTS)
+            page.right = self.setup.get_right_margin(Gtk.UNIT_POINTS)
 
-        width = size.get_width(gtk.UNIT_POINTS)
-        height = size.get_height(gtk.UNIT_POINTS)
+        width = size.get_width(Gtk.UNIT_POINTS)
+        height = size.get_height(Gtk.UNIT_POINTS)
 
         # no int
-        if orientation in (gtk.PAGE_ORIENTATION_PORTRAIT, gtk.PAGE_ORIENTATION_REVERSE_PORTRAIT):
+        if orientation in (Gtk.PAGE_ORIENTATION_PORTRAIT, Gtk.PAGE_ORIENTATION_REVERSE_PORTRAIT):
             orientation = _("Vertical")
             width = int(width)
             height = int(height)
@@ -587,23 +590,22 @@ class Application(gtk.Window):
         self.editor.canvas.queue_draw()
 
     def export_to_pdf(self, widget, format):
-        dialog = gtk.FileChooserDialog(title=_("Save PDF file as"),
+        dialog = Gtk.FileChooserDialog(title=_("Save PDF file as"),
             parent=self,
-            action=gtk.FILE_CHOOSER_ACTION_SAVE,
-            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
-                     gtk.STOCK_SAVE, gtk.RESPONSE_ACCEPT),
-            backend=None)
+            action=Gtk.FileChooserAction.SAVE,
+            buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                     Gtk.STOCK_SAVE, Gtk.ResponseType.ACCEPT))
 
         dialog.set_transient_for(self)
-        dialog.set_default_response(gtk.RESPONSE_ACCEPT)
+        dialog.set_default_response(Gtk.ResponseType.ACCEPT)
 
-        filter = gtk.FileFilter()
+        filter = Gtk.FileFilter()
         filter.set_name(_("PDF files"))
         filter.add_mime_type("document/pdf")
         filter.add_pattern("*.pdf")
         dialog.add_filter(filter)
         response = dialog.run()
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             filename = dialog.get_filename()
             if filename is not None:
                 self.editor.canvas.save_to_pdf(filename)
@@ -611,17 +613,16 @@ class Application(gtk.Window):
         dialog.destroy()
 
     def set_background(self, widget, data):
-        dialog = gtk.FileChooserDialog(title=_("Select background"),
+        dialog = Gtk.FileChooserDialog(title=_("Select background"),
             parent=self,
-            action=gtk.FILE_CHOOSER_ACTION_OPEN,
-            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
-                     gtk.STOCK_OK, gtk.RESPONSE_ACCEPT),
-            backend=None)
+            action=Gtk.FileChooserAction.OPEN,
+            buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                     Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT))
 
         def update_preview(dialog, preview):
             filename = dialog.get_preview_filename()
             try:
-                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128,
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128,
                                                               128)
                 preview.set_from_pixbuf(pixbuf)
                 have_preview = True
@@ -629,7 +630,7 @@ class Application(gtk.Window):
                 have_preview = False
             dialog.set_preview_widget_active(have_preview)
 
-        preview = gtk.Image()
+        preview = Gtk.Image()
 
         dialog.set_preview_widget(preview)
         dialog.connect("update-preview", update_preview, preview)
@@ -637,7 +638,7 @@ class Application(gtk.Window):
         dialog.set_transient_for(self)
 
         def add_filter(dialog, name, pattern, type=None):
-            filter = gtk.FileFilter()
+            filter = Gtk.FileFilter()
             filter.set_name(name)
             if type:
                 filter.add_mime_type(type)
@@ -650,7 +651,7 @@ class Application(gtk.Window):
 
         response = dialog.run()
 
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             filename = dialog.get_filename()
             self.filename = filename
             if filename is not None:
@@ -667,11 +668,11 @@ class Application(gtk.Window):
             self.window.unfullscreen()
 
     def quit(self, widget, event):
-        print "Motion events:", self.editor.canvas.statics.motion
-        print "Expose events:", self.editor.canvas.statics.expose
-        print "Consumed motion events:", self.editor.canvas.statics.consumed.motion
+        print("Motion events:", self.editor.canvas.statics.motion)
+        print("Expose events:", self.editor.canvas.statics.expose)
+        print("Consumed motion events:", self.editor.canvas.statics.consumed.motion)
         print("Bye ;-)")
-        gtk.main_quit()
+        Gtk.main_quit()
         return True
 
     create = lambda self, widget, data, name: self.editor.canvas.create(Shape(name))
@@ -685,7 +686,7 @@ class Application(gtk.Window):
         webbrowser.open_new(url)
 
     def about(self, widget, data):
-        dialog = gtk.AboutDialog()
+        dialog = Gtk.AboutDialog()
         dialog.set_transient_for(self)
         dialog.set_program_name("sanaviron")
         dialog.set_name("sanaviron")
@@ -702,7 +703,7 @@ class Application(gtk.Window):
         dialog.set_artists(["Juan Manuel Mouriz <jmouriz@sanaviron.org>", "Ivlev Denis <ivlevdenis.ru@gmail.com>"])
         dialog.set_translator_credits("Juan Manuel Mouriz <jmouriz@sanaviron.org> " + _(
             "(Spanish)") + "\n" + "Ivlev Denis <ivlevdenis.ru@gmail.com> " + _("(Russian)"))
-        logo = gtk.gdk.pixbuf_new_from_file(os.path.join(os.path.dirname(__file__), "..", "images", "canvas-logo.png"))
+        logo = GdkPixbuf.Pixbuf.new_from_file(os.path.join(os.path.dirname(__file__), "..", "images", "canvas-logo.png"))
         dialog.set_logo(logo)
         #dialog.set_logo_icon_name(self.icon_name)
         dialog.run()

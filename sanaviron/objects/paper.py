@@ -3,8 +3,8 @@
 
 import cairo
 
-from margins import Margins
-from scale import Scale
+from .margins import Margins
+from .scale import Scale
 
 class Paper(Margins):
     """This class represents a paper"""

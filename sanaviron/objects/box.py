@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
-from object import Object
-from separator import Separator
-from size import Size
-from objects import *
+from .object import Object
+from .separator import Separator
+from .size import Size
 
 class Box(Object):
     """This class represents a box"""

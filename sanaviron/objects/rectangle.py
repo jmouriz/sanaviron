@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from position import Position
-from size import Size
+from .position import Position
+from .size import Size
 
 
 class Rectangle(Position, Size):

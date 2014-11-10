@@ -1,75 +1,76 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import gtk
+from gi.repository import Gtk
+from gi.repository import GObject
 
-class Pager(gtk.HBox):
+class Pager(Gtk.HBox):
     """This class represents a pager"""
 
     def __init__(self, canvas):
-        gtk.HBox.__init__(self)
+        GObject.GObject.__init__(self)
 
         self.canvas = canvas
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_GOTO_FIRST, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_GOTO_FIRST, Gtk.IconSize.MENU)
         #button.connect("clicked", self.callback)
         button.add(image)
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_GO_BACK, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_GO_BACK, Gtk.IconSize.MENU)
         #button.connect("clicked", self.callback)
         button.add(image)
 
-        self.button = gtk.Button()
-        self.button.set_relief(gtk.RELIEF_NONE)
+        self.button = Gtk.Button()
+        self.button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(self.button)
 
         self.update()
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_GO_FORWARD, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_GO_FORWARD, Gtk.IconSize.MENU)
         #button.connect("clicked", self.callback)
         button.add(image)
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_GOTO_LAST, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_GOTO_LAST, Gtk.IconSize.MENU)
         #button.connect("clicked", self.callback)
         button.add(image)
 
-        separator = gtk.VSeparator()
+        separator = Gtk.VSeparator()
         self.add(separator)
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_NEW, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_NEW, Gtk.IconSize.MENU)
         button.connect("clicked", self.add_page)
         button.add(image)
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_DELETE, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_DELETE, Gtk.IconSize.MENU)
         #button.connect("clicked", self.callback)
         button.add(image)
 
@@ -83,9 +84,9 @@ class Pager(gtk.HBox):
         self.update()
 
 if __name__ == '__main__':
-    window = gtk.Window()
-    window.connect("delete-event", gtk.main_quit)
+    window = Gtk.Window()
+    window.connect("delete-event", Gtk.main_quit)
     pager = Pager()
     window.add(pager)
     window.show_all()
-    gtk.main()
+    Gtk.main()

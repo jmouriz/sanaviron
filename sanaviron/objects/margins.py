@@ -3,8 +3,8 @@
 
 import cairo
 
-from rectangle import Rectangle
-from control import Control
+from .rectangle import Rectangle
+from .control import Control
 
 class Margins(Rectangle):
     """This class represents the margins"""

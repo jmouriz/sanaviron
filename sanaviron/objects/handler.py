@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import NONE, CENTER, ANONIMOUS
 
 import cairo
 
-from control import Control
-from objects import NONE, CENTER, ANONIMOUS
+from .control import Control
 
 class Handler:
     """This class represents a rectangular control points handler"""

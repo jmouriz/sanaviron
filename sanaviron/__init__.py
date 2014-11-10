@@ -9,7 +9,7 @@ import locale
 import gettext
 import os
 import cairo
-import gtk
+from gi.repository import Gtk
 import sys
 
 VERSION = open(os.path.join(os.path.dirname(__file__), "..", "VERSION")).read()
@@ -46,7 +46,7 @@ def get_summary():
     summary = "Sanaviron version: %s (%s)\n" % (VERSION, 'Testing' if "--testing" in sys.argv else 'Production')
     summary += "System: %s %s %s\n" % (platform.system(), platform.release(), platform.version())
     summary += "Python version: %s\n" % platform.python_version()
-    summary += "GTK version: %s\n" % '.'.join(map(str, gtk.ver))
+    summary += "GTK version: %s.%s.%s\n" % (Gtk.MAJOR_VERSION, Gtk.MINOR_VERSION, Gtk.MICRO_VERSION)
     summary += "Cairo version: %s" % cairo.cairo_version_string()
 
     return summary

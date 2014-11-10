@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
-from object import Object
-from control import Control
-from objects import *
+from .object import Object
+from .control import Control
 
 class Connector(Object):
     """This class represents a connector between two objects"""

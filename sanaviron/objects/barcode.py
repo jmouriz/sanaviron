@@ -1,13 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-import os
 import platform
-from ctypes import c_char_p, c_int, c_double, CDLL
-from object import Object
-from objects import *
+import os
 
-import pango, pangocairo
+from ctypes import c_char_p, c_int, c_double, CDLL
+
+from .__init__ import *
+
+from .object import Object
+
+from gi.repository import Pango
+from gi.repository import PangoCairo
 
 BARCODE_ANY = 0  # /* Choose best-fit */
 BARCODE_EAN = 1  # /* Code EAN */
@@ -183,12 +186,12 @@ class BarCode(Object):
 
         px = 0
         correction = 0
-        layout = pangocairo.CairoContext.create_layout(context)
-        font = pango.FontDescription("Verdana 12")
+        layout = PangoCairo.create_layout(context)
+        font = Pango.FontDescription("Verdana 12")
         layout.set_font_description(font)
-        layout.set_text("0")
+        layout.set_text("0", 1)
         height, width = layout.get_size()
-        height /= pango.SCALE
+        height /= Pango.SCALE
         height *= 2
 
         if text:
@@ -202,9 +205,9 @@ class BarCode(Object):
                     correction += 2
                 px = x
 
-                layout.set_text(byte)
+                layout.set_text(byte, 1)
                 context.move_to(self.x + (x * ratio - correction), self.y + self.height - height)
-                context.show_layout(layout)
+                PangoCairo.show_layout(context, layout)
 #            By now, is impossible draw text with this function because now text is drawing digit by digit.
 #            And each digit perform some metrics and calculations.
 #            print_text(context, text=code,
@@ -225,4 +228,4 @@ class BarCode(Object):
 if __name__ == "__main__":
     data = BCIface.get_code_data(BARCODE_EAN, "800894002700", 100, 100)
     text = BCIface.get_text_data(BARCODE_EAN, "800894002700")
-    print data, text
+    print(data, text)

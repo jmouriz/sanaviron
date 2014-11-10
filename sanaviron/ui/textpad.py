@@ -1,81 +1,83 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import gtk
+from gi.repository import Gtk
+from gi.repository import GObject
+
 from interfaces.signalizable import Signalizable
 
-class TextPad(gtk.VBox, Signalizable):
+class TextPad(Gtk.VBox, Signalizable):
     """This class represents a minimal text editor"""
 
     def __init__(self, application):
-        gtk.VBox.__init__(self)
+        GObject.GObject.__init__(self)
         Signalizable.__init__(self)
 
-        handle = gtk.HandleBox()
-        handle.set_handle_position(gtk.POS_LEFT)
-        self.pack_start(handle, False, False)
+        handle = Gtk.HandleBox()
+        handle.set_handle_position(Gtk.PositionType.LEFT)
+        self.pack_start(handle, False, False, 0)
 
-        toolbar = gtk.Toolbar()
-        toolbar.set_orientation(gtk.ORIENTATION_HORIZONTAL)
-        #toolbar.set_style(gtk.TOOLBAR_ICONS)
-        toolbar.set_style(gtk.TOOLBAR_BOTH_HORIZ)
-        toolbar.set_icon_size(gtk.ICON_SIZE_MENU)
+        toolbar = Gtk.Toolbar()
+        toolbar.set_orientation(Gtk.Orientation.HORIZONTAL)
+        #toolbar.set_style(Gtk.ToolbarStyle.ICONS)
+        toolbar.set_style(Gtk.ToolbarStyle.BOTH_HORIZ)
+        toolbar.set_icon_size(Gtk.IconSize.MENU)
         handle.add(toolbar)
 
         position = 0
-        button = gtk.ToolButton(gtk.STOCK_BOLD)
+        button = Gtk.ToolButton(Gtk.STOCK_BOLD)
         toolbar.insert(button, position)
 
         position += 1
-        button = gtk.ToolButton(gtk.STOCK_ITALIC)
+        button = Gtk.ToolButton(Gtk.STOCK_ITALIC)
         toolbar.insert(button, position)
 
         position += 1
-        button = gtk.ToolButton(gtk.STOCK_UNDERLINE)
+        button = Gtk.ToolButton(Gtk.STOCK_UNDERLINE)
         toolbar.insert(button, position)
 
         position += 1
-        button = gtk.ToolButton(gtk.STOCK_STRIKETHROUGH)
+        button = Gtk.ToolButton(Gtk.STOCK_STRIKETHROUGH)
         toolbar.insert(button, position)
 
         position += 1
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         toolbar.insert(separator, position)
 
         position += 1
-        button = gtk.ToolButton(gtk.STOCK_JUSTIFY_LEFT)
+        button = Gtk.ToolButton(Gtk.STOCK_JUSTIFY_LEFT)
         toolbar.insert(button, position)
 
         position += 1
-        button = gtk.ToolButton(gtk.STOCK_JUSTIFY_RIGHT)
+        button = Gtk.ToolButton(Gtk.STOCK_JUSTIFY_RIGHT)
         toolbar.insert(button, position)
 
         position += 1
-        button = gtk.ToolButton(gtk.STOCK_JUSTIFY_CENTER)
+        button = Gtk.ToolButton(Gtk.STOCK_JUSTIFY_CENTER)
         toolbar.insert(button, position)
 
         position += 1
-        button = gtk.ToolButton(gtk.STOCK_JUSTIFY_FILL)
+        button = Gtk.ToolButton(Gtk.STOCK_JUSTIFY_FILL)
         toolbar.insert(button, position)
 
         position += 1
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         toolbar.insert(separator, position)
 
         position += 1
-        button = gtk.ToolButton(gtk.STOCK_INDENT)
+        button = Gtk.ToolButton(Gtk.STOCK_INDENT)
         toolbar.insert(button, position)
 
         position += 1
-        button = gtk.ToolButton(gtk.STOCK_UNINDENT)
+        button = Gtk.ToolButton(Gtk.STOCK_UNINDENT)
         toolbar.insert(button, position)
 
-        area = gtk.ScrolledWindow()
-        area.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        area = Gtk.ScrolledWindow()
+        area.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         adjustment = area.get_vadjustment()
         adjustment.need_scroll = True
         adjustment.connect("changed", self.update_adjustment)
         adjustment.connect("value-changed", self.update_value)
-        entry = gtk.TextView()
+        entry = Gtk.TextView()
         entry.connect_after("move-cursor", self.move)
         entry.connect("focus-in-event", self.focus_in)
         entry.connect("focus-out-event", self.focus_out)
@@ -86,8 +88,8 @@ class TextPad(gtk.VBox, Signalizable):
         self.buffer.connect("changed", self.changed)
         #area.add_with_viewport(entry)
         area.add(entry)
-        #entry.set_wrap_mode(gtk.WRAP_WORD_CHAR)
-        entry.set_wrap_mode(gtk.WRAP_CHAR)
+        #entry.set_wrap_mode(Gtk.WrapMode.WORD_CHAR)
+        entry.set_wrap_mode(Gtk.WrapMode.CHAR)
         self.add(area)
 
 #        from application import Application
@@ -117,20 +119,20 @@ class TextPad(gtk.VBox, Signalizable):
 
     def update_adjustment(self, adjustment):
         if adjustment.need_scroll:
-            adjustment.set_value(adjustment.upper - adjustment.page_size)
+            adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
             adjustment.need_scroll = True
 
     def update_value(self, adjustment):
         adjustment.need_scroll = abs(
-            adjustment.value + adjustment.page_size - adjustment.upper) < adjustment.step_increment
+            adjustment.get_value() + adjustment.get_page_size() - adjustment.get_upper()) < adjustment.get_step_increment()
 
     def set_text(self, text):
         self.buffer.set_text(text)
 
 if __name__ == '__main__':
-    window = gtk.Window()
-    window.connect("delete-event", gtk.main_quit)
+    window = Gtk.Window()
+    window.connect("delete-event", Gtk.main_quit)
     text_pad = TextPad()
     window.add(text_pad)
     window.show_all()
-    gtk.main()
+    Gtk.main()

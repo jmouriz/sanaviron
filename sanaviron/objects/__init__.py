@@ -7,8 +7,12 @@ __all__ = ['NONE', 'NORTHWEST', 'NORTH', 'NORTHEAST', 'WEST', 'EAST', 'SOUTHWEST
            'BOTTOM_RIGHT', 'BOTTOM', 'BOTTOM_LEFT', 'LEFT', 'CENTER','print_text', 'grad2rad', 'rad2grad',
            'angle_from_coordinates', 'get_side', 'opposite', 'set_as_point', 'get_default_font']
 
-import pango, pangocairo,platform,gtk
+from gi.repository import Pango
+from gi.repository import PangoCairo
+from gi.repository import Gtk
+
 from math import pi, atan2
+import platform
 
 NONE = -1
 
@@ -198,21 +202,21 @@ def print_text(context, text="", rect={'x': 0, 'y': 0, 'w': 1, 'h': 1},
                                                                  after the 10th character letter spacing reset to 0
     """
     context.save()
-    font = font or " ".join([font_name, font_style, str(font_size)]) or gtk.Style().font_desc.to_string()
+    font = font or " ".join([font_name, font_style, str(font_size)]) or Gtk.Style().font_desc.to_string()
     layout = pangocairo.CairoContext.create_layout(context)
-    desc = pango.FontDescription(font)
+    desc = Pango.FontDescription(font)
     layout.set_font_description(desc)
-    attr_list=pango.AttrList()
+    attr_list=Pango.AttrList()
     if len(letter_spacing):
         for i in letter_spacing:
-            attr = pango.AttrLetterSpacing(int(i[1]*pango.SCALE),i[0],len(text))
+            attr = Pango.AttrLetterSpacing(int(i[1]*Pango.SCALE),i[0],len(text))
             attr_list.insert(attr)
     layout.set_attributes(attr_list)
     layout.set_markup(str(text))
     pangocairo.CairoContext.update_layout(context, layout)
     lw, lh = layout.get_size()
-    lw /= pango.SCALE
-    lh /= pango.SCALE
+    lw /= Pango.SCALE
+    lh /= Pango.SCALE
     context_align(context,rect,align,lw,lh,border)
     pangocairo.CairoContext.show_layout(context, layout)
     context.restore()

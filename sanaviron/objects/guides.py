@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import HORIZONTAL, VERTICAL
 
 import cairo
-from rectangle import Rectangle
-
-from objects import HORIZONTAL, VERTICAL
+from .rectangle import Rectangle
 
 class Guides(Rectangle):
     """This class represets the auxiliary guides"""

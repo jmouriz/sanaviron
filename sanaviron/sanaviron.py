@@ -7,25 +7,25 @@ Main Sanaviron
 
 import platform
 import sys
-import gtk # because Linux run threads_init
+from gi.repository import Gtk
 import os
 
 from __init__ import *
 #sys.path.append('..')
-#from sanaviron import set_locale
 
 #if platform.system() == 'Windows':
 #    set_locale()
 #else:
-#    gtk.threads_init()
+#    Gtk.threads_init()
 #
 #install_gettext("sanaviron")
 
 def startapp():
     if platform.system() == 'Windows':
+        #from .__init__ import set_locale
         set_locale()
     else:
-        gtk.threads_init()
+        pass #Gtk.threads_init()
 
     install_gettext("sanaviron")
 
@@ -36,7 +36,6 @@ def startapp():
 
     print(get_summary())
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     from ui.application import Application
     application = Application()
 

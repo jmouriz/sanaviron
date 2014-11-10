@@ -1,8 +1,8 @@
 # PyCha embedded in GTK example
 
-#import pygtk
-#pygtk.require('2.0')
-import gtk
+#import gi
+#gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 
 class gtk_example:
     def drawing_area_expose_event(self, widget, event, data=None):
@@ -74,13 +74,13 @@ class gtk_example:
 
     def __init__(self):
         # create a new window
-        self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+        self.window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
         self.window.set_size_request(500, 500)
         self.window.set_title("PyCha GTK Example")
-        self.window.connect("delete_event", lambda w, e: gtk.main_quit())
+        self.window.connect("delete_event", lambda w, e: Gtk.main_quit())
         self.window.set_border_width(2)
 
-        self.drawing_area = gtk.DrawingArea()
+        self.drawing_area = Gtk.DrawingArea()
         self.drawing_area.connect('expose_event',
             self.drawing_area_expose_event)
         self.drawing_area.connect('size_allocate',

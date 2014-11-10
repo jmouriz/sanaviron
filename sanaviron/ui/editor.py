@@ -1,25 +1,29 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-import gtk
 import sys
 
-from objects import HORIZONTAL, VERTICAL
-from ui.notification import Notification
-from ui.stock import EXPAND_PROPERTIES, CONTRACT_PROPERTIES
-from ui.properties import Properties
-from ui.climber import Climber
-from ui.pager import Pager
-from ui.ruler import HorizontalRuler, VerticalRuler
-from ui.layerselector import LayerSelector
-from ui import *
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
 
-class Editor(gtk.HPaned):
+from objects import HORIZONTAL, VERTICAL
+
+from .__init__ import *
+
+from .notification import Notification
+from .stock import EXPAND_PROPERTIES, CONTRACT_PROPERTIES
+from .properties import Properties
+from .climber import Climber
+from .pager import Pager
+from .ruler import HorizontalRuler, VerticalRuler
+from .layerselector import LayerSelector
+
+class Editor(Gtk.HPaned):
     """This class represents the main editor"""
 
     def __init__(self, application):
-        gtk.HPaned.__init__(self)
-        from ui.canvas import Canvas
+        GObject.GObject.__init__(self)
+        from .canvas import Canvas
         self.canvas = Canvas(application)
         self.properties = Properties(application)
 
@@ -28,7 +32,7 @@ class Editor(gtk.HPaned):
         self.canvas.connect("edit-child", self.edit_child)
         self.canvas.connect("scroll-event", self.wheel)
 
-        box = gtk.VBox()
+        box = Gtk.VBox()
 
         self.notification = Notification()
 
@@ -37,13 +41,13 @@ class Editor(gtk.HPaned):
         if '--source-editor-test' in sys.argv:
             while True:
                 try:
-                    from ui.code_editor import CodeEditor
+                    from .code_editor import CodeEditor
                 except:
                     self.notification.notificate(_("No module GtkSourceView installed"), ERROR)
                     self.pack1(box, True, False)
                     break
 
-                panel = gtk.VPaned()
+                panel = Gtk.VPaned()
                 panel.pack1(box, True, False)
                 code_editor = CodeEditor(application)
                 code_editor.editor.set_language("sql")
@@ -55,58 +59,58 @@ class Editor(gtk.HPaned):
 
         self.pack2(self.properties, False, True)
 
-        top = gtk.HBox()
-        box.pack_start(top, False, False)
+        top = Gtk.HBox()
+        box.pack_start(top, False, False, 0)
 
-        top.pack_start(self.notification, False, False)
+        top.pack_start(self.notification, False, False, 0)
 
         layer_selector = LayerSelector()
-        alignment = gtk.Alignment(1.0, 0.5)
+        alignment = Gtk.Alignment.new(1.0, 0.5, 0.0, 0.0)
         alignment.add(layer_selector)
-        top.pack_start(alignment, True, True)
+        top.pack_start(alignment, True, True, 0)
 
-        separator = gtk.VSeparator()
-        top.pack_start(separator, False, False)
+        separator = Gtk.VSeparator()
+        top.pack_start(separator, False, False, 0)
 
-        self.image = gtk.Image()
-        self.image.set_from_stock(CONTRACT_PROPERTIES, gtk.ICON_SIZE_MENU)
-        button = gtk.Button()
+        self.image = Gtk.Image()
+        self.image.set_from_stock(CONTRACT_PROPERTIES, Gtk.IconSize.MENU)
+        button = Gtk.Button()
         button.set_image(self.image)
-        button.set_relief(gtk.RELIEF_NONE)
+        button.set_relief(Gtk.ReliefStyle.NONE)
         button.connect("clicked", self.toggle_properties)
-        top.pack_start(button, False, False)
+        top.pack_start(button, False, False, 0)
 
-        table = gtk.Table()
+        table = Gtk.Table()
         box.add(table)
 
-        bottom = gtk.HBox()
-        box.pack_start(bottom, False, False)
+        bottom = Gtk.HBox()
+        box.pack_start(bottom, False, False, 0)
 
         self.climber = Climber(self.canvas)
-        bottom.pack_start(self.climber, False, False)
+        bottom.pack_start(self.climber, False, False, 0)
 
         pager = Pager(self.canvas)
-        alignment = gtk.Alignment(1.0, 0.5)
+        alignment = Gtk.Alignment.new(1.0, 0.5, 0.0, 0.0)
         alignment.add(pager)
-        bottom.pack_start(alignment, True, True)
+        bottom.pack_start(alignment, True, True, 0)
 
         self.horizontal_ruler = HorizontalRuler()
         self.horizontal_ruler.connect("append-tag", self.append_tag)
         self.horizontal_ruler.connect("move-tag", self.move_tag)
-        table.attach(self.horizontal_ruler, 1, 2, 0, 1, gtk.FILL | gtk.EXPAND, 0)
+        table.attach(self.horizontal_ruler, 1, 2, 0, 1, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, 0)
 
         self.vertical_ruler = VerticalRuler()
         self.vertical_ruler.connect("append-tag", self.append_tag)
         self.vertical_ruler.connect("move-tag", self.move_tag)
-        table.attach(self.vertical_ruler, 0, 1, 1, 2, 0, gtk.FILL | gtk.EXPAND)
+        table.attach(self.vertical_ruler, 0, 1, 1, 2, 0, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND)
 
-        area = gtk.ScrolledWindow()
-        area.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        area = Gtk.ScrolledWindow()
+        area.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         adjustment = area.get_vadjustment()
         adjustment.connect("value-changed", self.scroll, VERTICAL)
         adjustment = area.get_hadjustment()
         adjustment.connect("value-changed", self.scroll, HORIZONTAL)
-        table.attach(area, 1, 2, 1, 2, gtk.FILL | gtk.EXPAND, gtk.FILL | gtk.EXPAND)
+        table.attach(area, 1, 2, 1, 2, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND, Gtk.AttachOptions.FILL | Gtk.AttachOptions.EXPAND)
 
         self.canvas.code_editor = code_editor
         self.canvas.horizontal_ruler = self.horizontal_ruler
@@ -120,10 +124,10 @@ class Editor(gtk.HPaned):
     def toggle_properties(self, *args):
         properties = self.get_children()[1]
         if self.properties.get_visible():
-            self.image.set_from_stock(EXPAND_PROPERTIES, gtk.ICON_SIZE_MENU)
+            self.image.set_from_stock(EXPAND_PROPERTIES, Gtk.IconSize.MENU)
             properties.hide()
         else:
-            self.image.set_from_stock(CONTRACT_PROPERTIES, gtk.ICON_SIZE_MENU)
+            self.image.set_from_stock(CONTRACT_PROPERTIES, Gtk.IconSize.MENU)
             properties.show()
 
     def append_tag(self, widget, tag):
@@ -144,14 +148,14 @@ class Editor(gtk.HPaned):
 
     def edit_child(self, widget, child):
         pass
-        #print "edit", child
+        #print("edit", child)
 
     def wheel(self, widget, event):
-        if event.state & gtk.gdk.CONTROL_MASK:
-            if event.direction == gtk.gdk.SCROLL_UP:
+        if event.get_state() & Gdk.ModifierType.CONTROL_MASK:
+            if event.direction == Gdk.ScrollDirection.UP:
                 self.canvas.zoom_in()
                 self.climber.update()
-            elif event.direction == gtk.gdk.SCROLL_DOWN:
+            elif event.direction == Gdk.ScrollDirection.DOWN:
                 self.canvas.zoom_out()
                 self.climber.update()
             self.horizontal_ruler.zoom = self.canvas.zoom
@@ -168,7 +172,7 @@ class Editor(gtk.HPaned):
         pass
 
     def _select(self, widget, child, buffer):
-        #print "Selected object \"%s\"" % child.__name__
+        #print("Selected object \"%s\"" % child.__name__)
         #if child.__name__ == "Table":
         #if child.__name__ == "Text":
         #   if not child.x and not child.y:
@@ -180,7 +184,7 @@ class Editor(gtk.HPaned):
         #  self.canvas.put(textpad, child.x + self.canvas.origin.x, child.y + self.canvas.origin.y)
         if child.__name__ == "Text":
             text = child.get_property("text")
-            #print "putting text \"%s\"" % text
+            #print("putting text \"%s\"" % text)
             buffer.handler_disconnect(self.disconnect_handler)
             buffer.set_text(text)
             self.disconnect_handler = buffer.connect("changed", self.changed)

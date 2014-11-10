@@ -3,9 +3,9 @@
 
 from math import sin, cos
 
-from control import Control
-from object import Object
-from objects import *
+from .__init__ import *
+from .control import Control
+from .object import Object
 
 class Arc(Object):
     """This class represents an arc"""

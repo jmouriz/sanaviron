@@ -1,21 +1,22 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import gtk
+from gi.repository import Gtk
+from gi.repository import GObject
 
 from interfaces.signalizable import Signalizable
 from objects import *
 
-class Entry(gtk.HBox, Signalizable):
+class Entry(Gtk.HBox, Signalizable):
     """This class represents a entry with unit combobox"""
 
     def __init__(self):
-        gtk.HBox.__init__(self)
+        GObject.GObject.__init__(self)
         Signalizable.__init__(self)
 
         self.set_spacing(1)
-        alignment = gtk.Alignment(0.0, 0.5)
+        alignment = Gtk.Alignment.new(0.0, 0.5, 0.0, 0.0)
         self.add(alignment)
-        self.spin = gtk.SpinButton()
+        self.spin = Gtk.SpinButton()
         alignment.add(self.spin)
 
         self.spin.set_digits(2)
@@ -23,9 +24,9 @@ class Entry(gtk.HBox, Signalizable):
         self.spin.set_numeric(True)
         self.spin.set_wrap(False)
 
-        alignment = gtk.Alignment(0.0, 0.5)
+        alignment = Gtk.Alignment.new(0.0, 0.5, 0.0, 0.0)
         self.add(alignment)
-        self.entry = gtk.combo_box_new_text()
+        self.entry = Gtk.ComboBoxText()
         alignment.add(self.entry)
 
         self.install_signal("value-changed")
@@ -71,13 +72,13 @@ class AngularEntry(Entry):
 
 if __name__ == '__main__':
     def quit(widget, event):
-        gtk.main_quit()
+        Gtk.main_quit()
         return True
 
-    window = gtk.Window()
+    window = Gtk.Window()
     window.set_title("Units entry")
     window.connect("delete-event", quit)
     entry = Entry()
     window.add(entry)
     window.show_all()
-    gtk.main()
+    Gtk.main()

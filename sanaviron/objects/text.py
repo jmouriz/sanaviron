@@ -1,14 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
-import pango
-import pangocairo
-from object import Object
-from scale import Scale
-from position import Position
-from objects import *
-import gtk
-import gobject
+from gi.repository import Pango
+from gi.repository import PangoCairo
+from .object import Object
+from .scale import Scale
+from .position import Position
+from gi.repository import Gtk
+from gi.repository import GObject
 import os
 import platform
 from ctypes import c_char_p, c_int, CDLL
@@ -27,7 +27,8 @@ WSIface = CDLL(os.path.join(os.path.dirname(__file__), "wide-string", "wide-stri
 
 WSIface.get_cursor_position.restype = c_int
 
-class Text(Object, gtk.Editable):
+#class Text(Object, Gtk.Editable):
+class Text(Object):
     """This class represents a text"""
     __name__ = "Text"
 
@@ -43,7 +44,7 @@ class Text(Object, gtk.Editable):
         self.cursor.visible = True
         self.cursor.index = (0, 0)
 
-        self.timer_id = gobject.timeout_add(500, self.timer)
+        self.timer_id = GObject.timeout_add(500, self.timer)
 
         self.font = "Verdana"
         self.size = 32
@@ -75,15 +76,16 @@ class Text(Object, gtk.Editable):
     def draw(self, context):
         context.save()
 
-        context = pangocairo.CairoContext(context) # XXX
-        self.layout = pangocairo.CairoContext.create_layout(context)
+        #_context = PangoCairo.create_context(context) # XXX
+        #self.layout = PangoCairo.create_layout(_context)
+        self.layout = PangoCairo.create_layout(context)
         fontname = self.font
         if fontname.endswith(("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")): # XXX
             description = fontname
         else:
             size = int(self.size)
             description = "%s %d" % (fontname, size)
-        font = pango.FontDescription(description)
+        font = Pango.FontDescription(description)
         self.layout.set_justify(True)
         self.layout.set_font_description(font)
         text = self.get_property('text')
@@ -95,17 +97,17 @@ class Text(Object, gtk.Editable):
         context.move_to(self.x, self.y)
 
         if bool(self.preserve):
-            self.layout.set_width(int(self.width) * pango.SCALE)
+            self.layout.set_width(int(self.width) * Pango.SCALE)
             width, height = self.layout.get_size()
-            height /= pango.SCALE
+            height /= Pango.SCALE
             self.height = height
         else:
             width, height = self.layout.get_size()
-            width /= pango.SCALE
-            height /= pango.SCALE
+            width /= Pango.SCALE
+            height /= Pango.SCALE
             self.scale(context, width, height)
 
-        context.show_layout(self.layout)
+        PangoCairo.show_layout(context, self.layout)
         context.restore()
 
         if self.selected and self.cursor.visible:
@@ -163,12 +165,12 @@ class Text(Object, gtk.Editable):
         width, height = self.layout.get_size()
 
         if width:
-            horizontal = self.width / (width / pango.SCALE)
+            horizontal = self.width / (width / Pango.SCALE)
         else:
             horizontal = 1
 
         if height:
-            vertical = self.height / (height / pango.SCALE)
+            vertical = self.height / (height / Pango.SCALE)
         else:
             vertical = 1
 
@@ -177,8 +179,8 @@ class Text(Object, gtk.Editable):
     def get_index_from_x_y(self, x, y):
         (horizontal, vertical) = self.get_aspect()
         position = Position()
-        position.x = int((x - self.x) * pango.SCALE / horizontal)
-        position.y = int((y - self.y) * pango.SCALE / vertical)
+        position.x = int((x - self.x) * Pango.SCALE / horizontal)
+        position.y = int((y - self.y) * Pango.SCALE / vertical)
         return self.layout.xy_to_index(position.x, position.y)
 
     def get_cursor_position(self):
@@ -196,10 +198,10 @@ class Text(Object, gtk.Editable):
             pass
 
         bounds = Bounds()
-        bounds.x = (strong[0] / pango.SCALE) * horizontal
-        bounds.y = (strong[1] / pango.SCALE) * vertical
-        bounds.width = strong[2] / pango.SCALE + 15
-        bounds.height = strong[3] / pango.SCALE * vertical
+        bounds.x = (strong.x / Pango.SCALE) * horizontal
+        bounds.y = (strong.y / Pango.SCALE) * vertical
+        bounds.width = strong.width / Pango.SCALE + 15
+        bounds.height = strong.height / Pango.SCALE * vertical
 
         return bounds
 

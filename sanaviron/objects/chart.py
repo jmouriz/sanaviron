@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
 import cairo
-from charts import PIE_CHART_TYPE, get_chart_from_type
-from object import Object
-from objects import *
+from .charts import PIE_CHART_TYPE, get_chart_from_type
+from .object import Object
 
 class Chart(Object):
     """This class represents a chart"""

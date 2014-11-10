@@ -1,22 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-from handler import Handler
-from magnetos import Magnetos
-from rectangle import Rectangle
-from color import Color
-from gradient import Gradient
-from position import Position
-from point import Point
-from size import Size
-from objects import get_side
-from objects import *
-
-import gtk
-import cairo
-import pango
-import pangocairo
 import platform
+import cairo
+
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import Pango
+from gi.repository import PangoCairo
+
+from .__init__ import *
+
+from .handler import Handler
+from .magnetos import Magnetos
+from .rectangle import Rectangle
+from .color import Color
+from .gradient import Gradient
+from .position import Position
+from .point import Point
+from .size import Size
+#from .objects import get_side
 
 class Object(Rectangle):
     """This class represents the parent of all draweable objects"""
@@ -87,8 +89,9 @@ class Object(Rectangle):
         context.set_source_rgb(130 / 255.0, 130 / 255.0, 250 / 255.0)
         context.stroke()
 
-        context = pangocairo.CairoContext(context)
-        layout = pangocairo.CairoContext.create_layout(context)
+        #context = pangocairo.CairoContext(context)
+        #layout = pangocairo.CairoContext.create_layout(context)
+        layout = PangoCairo.create_layout(context)
         if platform.system() == 'Windows':
             fontname = 'Sans'
         else:
@@ -105,16 +108,16 @@ class Object(Rectangle):
         else:
             size = 12
         description = '%s Bold %d' % (fontname, size)
-        font = pango.FontDescription(description)
+        font = Pango.FontDescription(description)
         layout.set_justify(True)
         layout.set_font_description(font)
-        layout.set_text(text)
+        layout.set_text(text, len(text))
         context.set_source_rgb(0, 0, 0)
         width, height = layout.get_size()
-        width /= pango.SCALE
-        height /= pango.SCALE
+        width /= Pango.SCALE
+        height /= Pango.SCALE
         context.move_to(self.x - (extent + width) / 2, self.y - (extent + height) / 2)
-        context.show_layout(layout)
+        PangoCairo.show_layout(context, layout)
         context.set_antialias(cairo.ANTIALIAS_DEFAULT)
         context.restore()
 
@@ -161,27 +164,27 @@ class Object(Rectangle):
 
     def get_cursor(self, direction):
         if direction == NORTHWEST:
-            cursor = gtk.gdk.TOP_LEFT_CORNER
+            cursor = Gdk.CursorType.TOP_LEFT_CORNER
         elif direction == NORTH:
-            cursor = gtk.gdk.TOP_SIDE
+            cursor = Gdk.CursorType.TOP_SIDE
         elif direction == NORTHEAST:
-            cursor = gtk.gdk.TOP_RIGHT_CORNER
+            cursor = Gdk.CursorType.TOP_RIGHT_CORNER
         elif direction == WEST:
-            cursor = gtk.gdk.LEFT_SIDE
+            cursor = Gdk.CursorType.LEFT_SIDE
         elif direction == EAST:
-            cursor = gtk.gdk.RIGHT_SIDE
+            cursor = Gdk.CursorType.RIGHT_SIDE
         elif direction == SOUTHWEST:
-            cursor = gtk.gdk.BOTTOM_LEFT_CORNER
+            cursor = Gdk.CursorType.BOTTOM_LEFT_CORNER
         elif direction == SOUTH:
-            cursor = gtk.gdk.BOTTOM_SIDE
+            cursor = Gdk.CursorType.BOTTOM_SIDE
         elif direction == SOUTHEAST:
-            cursor = gtk.gdk.BOTTOM_RIGHT_CORNER
+            cursor = Gdk.CursorType.BOTTOM_RIGHT_CORNER
         elif direction >= ANONIMOUS:
-            cursor = gtk.gdk.CROSSHAIR
+            cursor = Gdk.CursorType.CROSSHAIR
         else:
-            cursor = gtk.gdk.ARROW
+            cursor = Gdk.CursorType.ARROW
 
-        return gtk.gdk.Cursor(cursor)
+        return Gdk.Cursor.new(cursor)
 
     def resize(self, x, y):
         direction = self.direction

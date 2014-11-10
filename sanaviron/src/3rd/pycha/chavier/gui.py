@@ -15,10 +15,10 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Chavier.  If not, see <http://www.gnu.org/licenses/>.
 
-import pygtk
+import gi
 
-pygtk.require('2.0')
-import gtk
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 
 from chavier.dialogs import (
     TextInputDialog, PointDialog, OptionDialog, RandomGeneratorDialog,
@@ -33,13 +33,13 @@ class GUI(object):
         self.chart = None
         self.surface = None
 
-        self.main_window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+        self.main_window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
         self.main_window.connect('delete_event', self.delete_event)
         self.main_window.connect('destroy', self.destroy)
         self.main_window.set_default_size(640, 480)
         self.main_window.set_title(u'Chavier')
 
-        vbox = gtk.VBox()
+        vbox = Gtk.VBox()
         self.main_window.add(vbox)
         vbox.show()
 
@@ -51,11 +51,11 @@ class GUI(object):
         vbox.pack_start(toolbar, False, False)
         toolbar.show()
 
-        hpaned = gtk.HPaned()
+        hpaned = Gtk.HPaned()
         vbox.pack_start(hpaned, True, True)
         hpaned.show()
 
-        vpaned = gtk.VPaned()
+        vpaned = Gtk.VPaned()
         hpaned.add1(vpaned)
         vpaned.show()
 
@@ -72,7 +72,7 @@ class GUI(object):
         vpaned.add2(block2)
         block2.show()
 
-        self.drawing_area = gtk.DrawingArea()
+        self.drawing_area = Gtk.DrawingArea()
         self.drawing_area.connect('expose_event',
             self.drawing_area_expose_event)
         self.drawing_area.connect('size_allocate',
@@ -83,51 +83,51 @@ class GUI(object):
         self.main_window.show()
 
     def _create_ui_manager(self):
-        self.uimanager = gtk.UIManager()
+        self.uimanager = Gtk.UIManager()
         accel_group = self.uimanager.get_accel_group()
         self.main_window.add_accel_group(accel_group)
 
-        action_group = gtk.ActionGroup('default')
+        action_group = Gtk.ActionGroup('default')
         action_group.add_actions([
             ('file', None, '_File', None, 'File', None),
-            ('quit', gtk.STOCK_QUIT, None, None, 'Quit the program',
+            ('quit', Gtk.STOCK_QUIT, None, None, 'Quit the program',
              self.quit),
 
             ('edit', None, '_Edit', None, 'Edit', None),
-            ('add_dataset', gtk.STOCK_ADD, '_Add dataset',
+            ('add_dataset', Gtk.STOCK_ADD, '_Add dataset',
              '<ctrl><alt>plus', 'Add another dataset', self.add_dataset),
-            ('remove_dataset', gtk.STOCK_REMOVE, '_Remove dataset',
+            ('remove_dataset', Gtk.STOCK_REMOVE, '_Remove dataset',
              '<ctrl><alt>minus', 'Remove the current dataset',
              self.remove_dataset),
-            ('edit_dataset', gtk.STOCK_EDIT, '_Edit dataset name',
+            ('edit_dataset', Gtk.STOCK_EDIT, '_Edit dataset name',
              '<ctrl><alt>e', 'Edit the name of the current dataset',
              self.edit_dataset),
-            ('add_point', gtk.STOCK_ADD, 'Add _point', '<ctrl>plus',
+            ('add_point', Gtk.STOCK_ADD, 'Add _point', '<ctrl>plus',
              'Add another point to the current dataset', self.add_point),
-            ('remove_point', gtk.STOCK_REMOVE, 'Remove p_oint',
+            ('remove_point', Gtk.STOCK_REMOVE, 'Remove p_oint',
              '<ctrl>minus',
              'Remove the current point of the current dataset',
              self.remove_point),
-            ('edit_point', gtk.STOCK_EDIT, 'Edit po_int', '<ctrl>e',
+            ('edit_point', Gtk.STOCK_EDIT, 'Edit po_int', '<ctrl>e',
              'Edit the current point of the current dataset',
              self.edit_point),
-            ('edit_option', gtk.STOCK_EDIT, 'Edit op_tion', None,
+            ('edit_option', Gtk.STOCK_EDIT, 'Edit op_tion', None,
              'Edit the current option',
              self.edit_option),
 
             ('view', None, '_View', None, 'View', None),
-            ('refresh', gtk.STOCK_REFRESH, None, '<ctrl>r',
+            ('refresh', Gtk.STOCK_REFRESH, None, '<ctrl>r',
              'Update the chart', self.refresh),
 
             ('tools', None, '_Tools', None, 'Tools', None),
-            ('random-points', gtk.STOCK_EXECUTE, '_Generate random points',
+            ('random-points', Gtk.STOCK_EXECUTE, '_Generate random points',
              '<ctrl>g', 'Generate random points',
              self.generate_random_points),
-            ('dump-chart-state', gtk.STOCK_CONVERT, '_Dump chart state',
+            ('dump-chart-state', Gtk.STOCK_CONVERT, '_Dump chart state',
              '<ctrl>d', 'Dump internal chart variables',
              self.dump_chart_state),
             ('help', None, '_Help', None, 'Help', None),
-            ('about', gtk.STOCK_ABOUT, None, None, 'About this program',
+            ('about', Gtk.STOCK_ABOUT, None, None, 'About this program',
              self.about),
         ])
         action_group.add_radio_actions([
@@ -206,9 +206,9 @@ class GUI(object):
         return menubar, toolbar
 
     def _create_sidebar_block(self, title, child_widget_creator):
-        box = gtk.VBox(spacing=6)
+        box = Gtk.VBox(spacing=6)
         box.set_border_width(6)
-        label = gtk.Label()
+        label = Gtk.Label()
         label.set_markup(u'<span size="large" weight="bold">%s</span>' % title)
         label.set_alignment(0.0, 0.5)
         box.pack_start(label, False, False)
@@ -221,40 +221,40 @@ class GUI(object):
         return box
 
     def _datasets_notebook_creator(self):
-        self.datasets_notebook = gtk.Notebook()
+        self.datasets_notebook = Gtk.Notebook()
         self.datasets_notebook.set_scrollable(True)
         return self.datasets_notebook
 
     def _dataset_treeview_creator(self):
-        store = gtk.ListStore(float, float)
-        treeview = gtk.TreeView(store)
+        store = Gtk.ListStore(float, float)
+        treeview = Gtk.TreeView(store)
 
-        column1 = gtk.TreeViewColumn('x', gtk.CellRendererText(), text=0)
+        column1 = Gtk.TreeViewColumn('x', Gtk.CellRendererText(), text=0)
         treeview.append_column(column1)
 
-        column2 = gtk.TreeViewColumn('y', gtk.CellRendererText(), text=1)
+        column2 = Gtk.TreeViewColumn('y', Gtk.CellRendererText(), text=1)
         treeview.append_column(column2)
 
         treeview.connect('row-activated', self.dataset_treeview_row_activated)
 
-        scrolled_window = gtk.ScrolledWindow()
-        scrolled_window.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        scrolled_window = Gtk.ScrolledWindow()
+        scrolled_window.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scrolled_window.add(treeview)
         treeview.show()
 
         return scrolled_window
 
     def _options_treeview_creator(self):
-        self.options_store = gtk.TreeStore(str, str, object)
+        self.options_store = Gtk.TreeStore(str, str, object)
         options = self.app.get_default_options()
         self._fill_options_store(options, None, self.app.OPTIONS_TYPES)
 
-        self.options_treeview = gtk.TreeView(self.options_store)
+        self.options_treeview = Gtk.TreeView(self.options_store)
 
-        column1 = gtk.TreeViewColumn('Name', gtk.CellRendererText(), text=0)
+        column1 = Gtk.TreeViewColumn('Name', Gtk.CellRendererText(), text=0)
         self.options_treeview.append_column(column1)
 
-        column2 = gtk.TreeViewColumn('Value', gtk.CellRendererText(), text=1)
+        column2 = Gtk.TreeViewColumn('Value', Gtk.CellRendererText(), text=1)
         self.options_treeview.append_column(column2)
 
         self.options_treeview.expand_all()
@@ -262,8 +262,8 @@ class GUI(object):
         self.options_treeview.connect('row-activated',
             self.options_treeview_row_activated)
 
-        scrolled_window = gtk.ScrolledWindow()
-        scrolled_window.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        scrolled_window = Gtk.ScrolledWindow()
+        scrolled_window.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scrolled_window.add(self.options_treeview)
         self.options_treeview.show()
 
@@ -291,7 +291,7 @@ class GUI(object):
     def _create_dataset(self, name):
         scrolled_window = self._dataset_treeview_creator()
         scrolled_window.show()
-        label = gtk.Label(name)
+        label = Gtk.Label(label=name)
         self.datasets_notebook.append_page(scrolled_window, label)
 
     def _get_datasets(self):
@@ -335,7 +335,7 @@ class GUI(object):
 
         dialog = PointDialog(self.main_window, x, y)
         response = dialog.run()
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             x, y = dialog.get_point()
             model.set(iter, 0, x, 1, y)
             self.refresh()
@@ -354,7 +354,7 @@ class GUI(object):
 
         dialog = OptionDialog(self.main_window, label, value, value_type)
         response = dialog.run()
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             new_value = dialog.get_value()
             if new_value == "":
                 new_value = None
@@ -366,7 +366,7 @@ class GUI(object):
         return False
 
     def destroy(self, widget, data=None):
-        gtk.main_quit()
+        Gtk.main_quit()
 
     def drawing_area_expose_event(self, widget, event, data=None):
         if self.chart is None:
@@ -405,7 +405,7 @@ class GUI(object):
         suggested_name = u'Dataset %d' % (n_pages + 1)
         dialog = TextInputDialog(self.main_window, suggested_name)
         response = dialog.run()
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             name = dialog.get_name()
             self._create_dataset(name)
             self.datasets_notebook.set_current_page(n_pages)
@@ -425,7 +425,7 @@ class GUI(object):
         name = label.get_label()
         dialog = TextInputDialog(self.main_window, name)
         response = dialog.run()
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             name = dialog.get_name()
             label.set_label(name)
         dialog.destroy()
@@ -439,7 +439,7 @@ class GUI(object):
 
         dialog = PointDialog(self.main_window, len(model) * 1.0, 0.0)
         response = dialog.run()
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             x, y = dialog.get_point()
             model.append((x, y))
             self.refresh()
@@ -504,7 +504,7 @@ class GUI(object):
 
         dialog = RandomGeneratorDialog(self.main_window)
         response = dialog.run()
-        if response == gtk.RESPONSE_ACCEPT:
+        if response == Gtk.ResponseType.ACCEPT:
             points = dialog.generate_points()
             for point in points:
                 model.append(point)
@@ -536,7 +536,7 @@ class GUI(object):
         dialog.destroy()
 
     def run(self):
-        gtk.main()
+        Gtk.main()
 
 
 def str2bool(str):

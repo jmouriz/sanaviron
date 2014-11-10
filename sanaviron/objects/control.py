@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
 import cairo
 
-from objects import set_as_point
 from math import pi
 
 class Control:#(Rectangle):

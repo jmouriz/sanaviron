@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
 import cairo
-from objects import *
-from gradientcolor import GradientColor
+from .gradientcolor import GradientColor
+
 from interfaces.serializable import Serializable
 
 

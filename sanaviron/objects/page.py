@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from paper import Paper
+from .paper import Paper
 
 class Page(Paper):
     """This class represents a single document page"""

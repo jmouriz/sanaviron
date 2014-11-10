@@ -1,26 +1,28 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import gtk
+from gi.repository import Gtk
+from gi.repository import GObject
 
-from ui.button import Button
-from ui.entry import LinearEntry, AngularEntry
-from ui.options import Options
+from .button import Button
+from .entry import LinearEntry, AngularEntry
+from .options import Options
+from .textpad import TextPad
+from .columnseditor import ColumnsEditor
+from .gradienteditor import LinearGradientEditor
+
 from objects import *
 from objects.observer import Observer
 from objects.barcode import barcodes
 from objects.charts import *
 from objects.color import Color
 
-from ui.textpad import TextPad
-from ui.columnseditor import ColumnsEditor
-from ui.gradienteditor import LinearGradientEditor
 import sys
 
-class Form(gtk.VBox):
+class Form(Gtk.VBox):
     """This class represents a properties form"""
 
     def __init__(self, name, properties):
-        gtk.VBox.__init__(self)
+        GObject.GObject.__init__(self)
         self.group = properties.group
         self.observer = properties.observer
         self.__name = name
@@ -28,16 +30,19 @@ class Form(gtk.VBox):
         self.entries = 0
 
     def add_section(self, caption):
-        expander = gtk.Expander('<b>' + caption + '</b>')
+        label = Gtk.Label()
+        label.set_markup('<b>' + caption + '</b>')
+        expander = Gtk.Expander()
+        expander.set_label_widget(label)
         expander.set_expanded(True)
         label = expander.get_label_widget()
         label.set_use_markup(True)
         self.add(expander)
 
-        table = gtk.Table()
+        table = Gtk.Table()
         table.set_row_spacings(6)
         table.set_col_spacings(12)
-        alignment = gtk.Alignment(0.0, 0.0, 1.0, 0.0)
+        alignment = Gtk.Alignment.new(0.0, 0.0, 1.0, 0.0)
         alignment.add(table)
         alignment.set_padding(6, 0, 12, 0)
         expander.add(alignment)
@@ -47,15 +52,15 @@ class Form(gtk.VBox):
 
     def add_entry(self, caption, entry, property, expanded=False):
         if caption:
-            label = gtk.Label(caption + ':')
+            label = Gtk.Label(label=caption + ':')
             self.group.add_widget(label)
             label.set_alignment(0.0, 0.5)
-            self.table.attach(label, 0, 1, self.entries, self.entries + 1, gtk.FILL, 0)
-            alignment = gtk.Alignment(0.0, 0.5, float(expanded))
+            self.table.attach(label, 0, 1, self.entries, self.entries + 1, Gtk.AttachOptions.FILL, 0)
+            alignment = Gtk.Alignment.new(0.0, 0.5, float(expanded), 0.0)
             alignment.add(entry)
-            self.table.attach(alignment, 1, 2, self.entries, self.entries + 1, gtk.EXPAND | gtk.FILL, 0)
+            self.table.attach(alignment, 1, 2, self.entries, self.entries + 1, Gtk.AttachOptions.EXPAND | Gtk.AttachOptions.FILL, 0)
         else:
-            self.table.attach(entry, 0, 2, self.entries, self.entries + 1, gtk.EXPAND | gtk.FILL, 0)
+            self.table.attach(entry, 0, 2, self.entries, self.entries + 1, Gtk.AttachOptions.EXPAND | Gtk.AttachOptions.FILL, 0)
         observable = "%s-%s" % (self.__name, property)
         self.observer.install_observable(observable, entry)
         self.entries += 1
@@ -118,20 +123,20 @@ class ColorizedObjectForm(SizedObjectForm):
         entry.add_option(_("Color"))
         entry.add_option(_("Gradient"))
         entry.add_option(_("Pattern"))
-        #entry = gtk.HButtonBox()
-        #entry.set_layout(gtk.BUTTONBOX_SPREAD)
+        #entry = Gtk.HButtonBox()
+        #entry.set_layout(Gtk.ButtonBoxStyle.SPREAD)
         #entry.set_spacing(10)
-        #entry.add(gtk.ToggleButton(_("Color")))
-        #entry.add(gtk.ToggleButton(_("Gradient")))
-        #entry.add(gtk.ToggleButton(_("Pattern")))
+        #entry.add(Gtk.ToggleButton(_("Color")))
+        #entry.add(Gtk.ToggleButton(_("Gradient")))
+        #entry.add(Gtk.ToggleButton(_("Pattern")))
         self.add_entry(_("Fill style"), entry, "fill_style")
 
-        entry = gtk.ColorButton()
+        entry = Gtk.ColorButton()
         entry.set_use_alpha(True)
         entry.connect("color-set", self.set_stroke_color)
         self.add_entry(_("Stroke"), entry, "foreground")
 
-        entry = gtk.ColorButton()
+        entry = Gtk.ColorButton()
         entry.set_use_alpha(True)
         entry.connect("color-set", self.set_fill_color)
         self.add_entry(_("Fill"), entry, "background")
@@ -169,36 +174,36 @@ class ColorizedObjectForm(SizedObjectForm):
                 self.canvas.queue_draw()
 
 
-class Properties(gtk.ScrolledWindow):
+class Properties(Gtk.ScrolledWindow):
     """This class represents the properties bar"""
 
     def __init__(self, application):
-        gtk.ScrolledWindow.__init__(self)
+        GObject.GObject.__init__(self)
 
         self.observer = Observer()
 
         self.objects = dict()
 
-        from canvas import Canvas
+        from .canvas import Canvas
         self.canvas = Canvas(application)
 
-        self.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
+        self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
 
-        properties = gtk.VBox()
+        properties = Gtk.VBox()
         self.add_with_viewport(properties)
 
-        self.group = gtk.SizeGroup(gtk.SIZE_GROUP_HORIZONTAL)
+        self.group = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
 
         #---START-------------------------------------------------------
         button = Button(_("General properties"))
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = Form("general", self)
         button.add(form)
 
         form.add_section(_("Units"))
 
-        entry = gtk.combo_box_new_text()
+        entry = Gtk.ComboBoxText()
         entry.append_text(CENTIMETERS)
         entry.append_text(MILLIMETERS)
         entry.append_text(DOTS)
@@ -207,7 +212,7 @@ class Properties(gtk.ScrolledWindow):
 
         form.add_entry(_("Preferred linear unit"), entry, "linear-unit")
 
-        entry = gtk.combo_box_new_text()
+        entry = Gtk.ComboBoxText()
         entry.append_text(DEGREES)
         entry.append_text(RADIANS)
         entry.set_active(1)
@@ -217,7 +222,7 @@ class Properties(gtk.ScrolledWindow):
 
         #---START-------------------------------------------------------
         button = Button(_("Document properties"))
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = Form("document", self)
         button.add(form)
@@ -252,23 +257,23 @@ class Properties(gtk.ScrolledWindow):
         entry = LinearEntry()
         form.add_entry(_("Guides size"), entry, "guides-size")
 
-        entry = gtk.CheckButton(_("Show margins"))
+        entry = Gtk.CheckButton(_("Show margins"))
         form.add_entry(None, entry, "margins-active")
 
-        entry = gtk.CheckButton(_("Show guides"))
+        entry = Gtk.CheckButton(_("Show guides"))
         form.add_entry(None, entry, "guides-active")
 
-        entry = gtk.CheckButton(_("Show grid"))
+        entry = Gtk.CheckButton(_("Show grid"))
         form.add_entry(None, entry, "grid-active")
 
-        entry = gtk.CheckButton(_("Enable snap"))
+        entry = Gtk.CheckButton(_("Enable snap"))
         form.add_entry(None, entry, "snap")
         #---END---------------------------------------------------------
 
         #---START-------------------------------------------------------
         button = Button(_("Line properties"))
         self.objects["Line"] = button
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = SizedObjectForm("line", self)
         button.add(form)
@@ -277,7 +282,7 @@ class Properties(gtk.ScrolledWindow):
         #---START-------------------------------------------------------
         button = Button(_("Box properties"))
         self.objects["Box"] = button
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = ColorizedObjectForm("box", self)
         button.add(form)
@@ -286,7 +291,7 @@ class Properties(gtk.ScrolledWindow):
         #---START-------------------------------------------------------
         button = Button(_("Rounded box properties"))
         self.objects["Rounded"] = button
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = ColorizedObjectForm("rounded", self)
         button.add(form)
@@ -301,18 +306,18 @@ class Properties(gtk.ScrolledWindow):
         #---START-------------------------------------------------------
         button = Button(_("Text properties"))
         self.objects["Text"] = button
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = ColorizedObjectForm("text", self)
         button.add(form)
 
         form.add_section(_("Format"))
 
-        entry = gtk.FontButton()
+        entry = Gtk.FontButton()
         entry.connect("font-set", self.change_font)
         form.add_entry(_("Font"), entry, "font")
 
-        entry = gtk.CheckButton(_("Preserve aspect"))
+        entry = Gtk.CheckButton(_("Preserve aspect"))
         entry.connect("toggled", self.preserve)
         form.add_entry(None, entry, "preserve")
 
@@ -327,7 +332,7 @@ class Properties(gtk.ScrolledWindow):
         #---START--------ARC properties-----------------------------------------------
         button = Button(_("Arc properties"))
         self.objects["Arc"] = button
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = ColorizedObjectForm("arc", self)
         button.add(form)
@@ -342,11 +347,11 @@ class Properties(gtk.ScrolledWindow):
         self.angle_stop.spin.connect("value-changed", self.change_angle_stop)
 
         form.add_section(_("Other"))
-        self.closed_btn = gtk.CheckButton()
+        self.closed_btn = Gtk.CheckButton()
         form.add_entry(_("Closed Arc"), self.closed_btn, "closed")
         self.closed_btn.connect("toggled", self.close_arc)
 
-        self.closed_at_centre_btn = gtk.CheckButton()
+        self.closed_at_centre_btn = Gtk.CheckButton()
         self.closed_at_centre_btn.set_active(1)
         form.add_entry(_("Closed Arc at Centre"), self.closed_at_centre_btn,
                        "closed-at-centre")
@@ -356,7 +361,7 @@ class Properties(gtk.ScrolledWindow):
         #---START-------------------------------------------------------
         button = Button(_("Table properties"))
         self.objects["Table"] = button
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = PositionedObjectForm("table", self)
         button.add(form)
@@ -385,15 +390,15 @@ class Properties(gtk.ScrolledWindow):
 
         form.add_section(_("Color"))
 
-        entry = gtk.ColorButton()
+        entry = Gtk.ColorButton()
         form.add_entry(_("Stroke"), entry, "stroke")
 
-        entry = gtk.ColorButton()
+        entry = Gtk.ColorButton()
         form.add_entry(_("Fill"), entry, "fill")
 
         form.add_section(_("Format"))
 
-        entry = gtk.FontButton()
+        entry = Gtk.FontButton()
         entry.connect("font-set", self.set_table_font)
         form.add_entry(_("Font"), entry, "font")
 
@@ -409,20 +414,20 @@ class Properties(gtk.ScrolledWindow):
         #---START-------------------------------------------------------
         button = Button(_("Barcode properties"))
         self.objects["BarCode"] = button
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = ColorizedObjectForm("barcode", self)
         button.add(form)
 
         form.add_section(_("Barcode"))
 
-        entry = gtk.combo_box_new_text()
+        entry = Gtk.ComboBoxText()
         entry.connect("changed", self.changed_barcode_type)
         for type in sorted(barcodes, key=lambda type: barcodes[type]):
             entry.append_text(type)
         form.add_entry(_("Type"), entry, "type")
 
-        entry = gtk.Entry()
+        entry = Gtk.Entry()
         entry.connect("changed", self.changed_barcode_code)
         form.add_entry(_("Code"), entry, "code")
         #---END---------------------------------------------------------
@@ -430,7 +435,7 @@ class Properties(gtk.ScrolledWindow):
         #---START-------------------------------------------------------
         button = Button(_("Image properties"))
         self.objects["Image"] = button
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = SizedObjectForm("image", self)
         button.add(form)
@@ -440,7 +445,7 @@ class Properties(gtk.ScrolledWindow):
         def update_preview(dialog, preview):
             filename = dialog.get_preview_filename()
             try:
-                pixbuf = gtk.gdk.pixbuf_new_from_file_at_size(filename, 128,
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128,
                                                               128)
                 preview.set_from_pixbuf(pixbuf)
                 have_preview = True
@@ -448,24 +453,23 @@ class Properties(gtk.ScrolledWindow):
                 have_preview = False
             dialog.set_preview_widget_active(have_preview)
 
-        dialog = gtk.FileChooserDialog(title="Source image file",
+        dialog = Gtk.FileChooserDialog(title="Source image file",
                                        #parent = self,
-                                       action=gtk.FILE_CHOOSER_ACTION_OPEN,
+                                       action=Gtk.FileChooserAction.OPEN,
                                        buttons=(
-                                       gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
-                                       gtk.STOCK_OPEN, gtk.RESPONSE_ACCEPT),
-                                       backend=None)
+                                       Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                                       Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT))
 
-        preview = gtk.Image()
+        preview = Gtk.Image()
 
         dialog.set_preview_widget(preview)
         dialog.connect("update-preview", update_preview, preview)
 
         #dialog.set_transient_for(self)
-        dialog.set_default_response(gtk.RESPONSE_OK)
+        dialog.set_default_response(Gtk.ResponseType.OK)
 
         def add_filter(dialog, name, pattern, type=None):
-            filter = gtk.FileFilter()
+            filter = Gtk.FileFilter()
             filter.set_name(name)
             if type:
                 filter.add_mime_type(type)
@@ -478,28 +482,28 @@ class Properties(gtk.ScrolledWindow):
 
         dialog.connect("file-activated", self.changed_image_file)
 
-        entry = gtk.FileChooserButton(dialog)
+        entry = Gtk.FileChooserButton(dialog)
         form.add_entry(_("Image file"), entry, "file", True)
         #---END---------------------------------------------------------
 
         #---START-------------------------------------------------------
         button = Button(_("Chart properties"))
         self.objects["Chart"] = button
-        properties.pack_start(button, False, False)
+        properties.pack_start(button, False, False, 0)
 
         form = SizedObjectForm("chart", self)
         button.add(form)
 
         form.add_section(_("Chart"))
 
-        entry = gtk.combo_box_new_text()
+        entry = Gtk.ComboBoxText()
         entry.connect("changed", self.changed_chart_type)
         for type in sorted(chart_types, key=lambda type: chart_types[type]):
             entry.append_text(type)
         form.add_entry(_("Type"), entry, "type")
         #---END---------------------------------------------------------
 
-        fill = gtk.Label("\n")
+        fill = Gtk.Label(label="\n")
         properties.add(fill)
 
     def select(self, name, child):
@@ -613,7 +617,7 @@ class Properties(gtk.ScrolledWindow):
                 else:
                     entry.add_column()
                 columns = ':'.join(columns)
-                #print titles
+                #print(titles)
                 titles = ':'.join(titles)
                 child.set_property('columns', columns)
                 child.set_property('titles', titles)
@@ -630,9 +634,9 @@ class Properties(gtk.ScrolledWindow):
 
     def set_text_foreground(self, widget):
         color = widget.get_color()
-        print color.red
-        print color.green
-        print color.blue
+        print(color.red)
+        print(color.green)
+        print(color.blue)
 
     def cursor_moved(self, entry, position):
         for child in self.canvas.document.pages[0].children:
@@ -643,7 +647,7 @@ class Properties(gtk.ScrolledWindow):
 
     def changed(self, buffer):
         start, end = buffer.get_bounds()
-        text = buffer.get_text(start, end)
+        text = buffer.get_text(start, end, False)
         for child in self.canvas.document.pages[0].children:
             if child.__name__ == "Text" and child.selected:
                 child.set_property('text', text)
@@ -726,7 +730,7 @@ class Properties(gtk.ScrolledWindow):
 
     def changed_image_file(self, widget):
         filename = widget.get_filename()
-        print filename
+        print(filename)
         if filename is not None:
             for child in self.canvas.document.pages[0].children:
                 if child.__name__ == "Image" and child.selected:
@@ -747,13 +751,13 @@ class Properties(gtk.ScrolledWindow):
 
 if __name__ == '__main__':
     def quit(widget, event):
-        gtk.main_quit()
+        Gtk.main_quit()
         return True
 
-    window = gtk.Window()
+    window = Gtk.Window()
     window.set_title(_("Properties panel"))
     window.connect("delete-event", quit)
     properties = Properties(None)
     window.add(properties)
     window.show_all()
-    gtk.main()
+    Gtk.main()

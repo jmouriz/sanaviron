@@ -5,11 +5,13 @@
 
 import platform
 import sys
-import gtk
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
 
 
 if platform.system() != 'Windows':
-    gtk.threads_init()
+    pass #Gtk.threads_init()
 
 import cairo
 
@@ -36,13 +38,13 @@ from objects.connector import Connector
 from objects.chart import Chart
 
 from objects import *
-from ui import singleton
+from .__init__ import singleton
 
 import xml.parsers.expat
 import xml.dom.minidom
 
 
-class BaseCanvas(gtk.Layout, Signalizable):
+class BaseCanvas(Gtk.Layout, Signalizable):
     """This class represents a low level canvas"""
 
     #    canvas = None
@@ -57,7 +59,7 @@ class BaseCanvas(gtk.Layout, Signalizable):
     #
     #    def initialize(self):
     def __init__(self, application=None):
-        gtk.Layout.__init__(self)
+        GObject.GObject.__init__(self)
         Signalizable.__init__(self)
 
         self.is_testing = False
@@ -92,15 +94,15 @@ class BaseCanvas(gtk.Layout, Signalizable):
     def configure_events(self):
         self.set_events(0)
 
-        self.add_events(gtk.gdk.EXPOSURE_MASK |
-                        gtk.gdk.BUTTON_PRESS_MASK |
-                        gtk.gdk.BUTTON_RELEASE_MASK |
-                        gtk.gdk.POINTER_MOTION_MASK |
-                        gtk.gdk.BUTTON_MOTION_MASK)
-        #self.add_events(gtk.gdk.KEY_PRESS_MASK)
+        self.add_events(Gdk.EventMask.EXPOSURE_MASK |
+                        Gdk.EventMask.BUTTON_PRESS_MASK |
+                        Gdk.EventMask.BUTTON_RELEASE_MASK |
+                        Gdk.EventMask.POINTER_MOTION_MASK |
+                        Gdk.EventMask.BUTTON_MOTION_MASK)
+        #self.add_events(Gdk.EventMask.KEY_PRESS_MASK)
 
     def configure_handlers(self):
-        self.expose_id = self.connect("expose-event", self.expose)
+        self.expose_id = self.connect("draw", self.expose)
         self.motion_id = self.connect("motion-notify-event", self.motion)
         self.connect("button-press-event", self.press)
         self.connect("button-release-event", self.release)
@@ -112,10 +114,10 @@ class BaseCanvas(gtk.Layout, Signalizable):
         self.install_signal("edit-child")
 
     def consume(self, type, state):
-        next = gtk.gdk.event_get()
+        next = Gdk.event_get()
         while next and next.type == type and next.state == state:
             next.free()
-            next = gtk.gdk.event_get()
+            next = Gdk.event_get()
             self.statics.consumed.motion += 1
 
     #def key_press(self, widget, event):
@@ -130,7 +132,7 @@ class BaseCanvas(gtk.Layout, Signalizable):
     def press(self, widget, event):
         raise NotImplementedError
 
-    def expose(self, widget, event):
+    def expose(self, widget, context):
         raise NotImplementedError
 
 
@@ -173,6 +175,7 @@ class CanvasImplementation(BaseCanvas):
 
         self.pick = False
         self.updated = False
+        #self.get_child() = None
         self.child = None
         self.stop_cursor_change = False
 
@@ -208,7 +211,8 @@ class CanvasImplementation(BaseCanvas):
                     self.emit("finalize", child)
 
         self.pick = False
-        widget.bin_window.set_cursor(gtk.gdk.Cursor(gtk.gdk.ARROW))
+        #widget.bin_window.set_cursor(Gdk.Cursor.new(Gdk.CursorType.ARROW))
+        widget.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.ARROW))
 
         self.updated = False
         self.update()
@@ -220,7 +224,7 @@ class CanvasImplementation(BaseCanvas):
         This code is executed when move the mouse pointer
         """
         self.statics.motion += 1
-        #self.consume(gtk.gdk.MOTION_NOTIFY, event.state)
+        #self.consume(Gdk.MOTION_NOTIFY, event.get_state())
         self.disconnect(self.motion_id)
         if self.horizontal_ruler:
             self.horizontal_ruler.motion(self.horizontal_ruler, event, True)
@@ -234,7 +238,8 @@ class CanvasImplementation(BaseCanvas):
                 for child in children:
                     if child.selected and child.handler.at_position(x, y):
                         direction = child.handler.get_direction(x, y)
-                        widget.bin_window.set_cursor(child.get_cursor(direction))
+                        #widget.bin_window.set_cursor(child.get_cursor(direction))
+                        widget.get_window().set_cursor(child.get_cursor(direction))
                         return direction
                 return NONE
 
@@ -242,16 +247,18 @@ class CanvasImplementation(BaseCanvas):
 
             if direction == NONE:
                 if self.pick:
-                    widget.bin_window.set_cursor(gtk.gdk.Cursor(gtk.gdk.PENCIL))
+                    #widget.bin_window.set_cursor(Gdk.Cursor.new(Gdk.PENCIL))
+                    widget.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.PENCIL))
                 else:
-                    widget.bin_window.set_cursor(gtk.gdk.Cursor(gtk.gdk.ARROW))
+                    #widget.bin_window.set_cursor(Gdk.Cursor.new(Gdk.CursorType.ARROW))
+                    widget.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.ARROW))
 
         if self.selection.active:
             self.selection.width = x - self.selection.x
             self.selection.height = y - self.selection.y
             self.updated = False
             self.update() # XXX
-        elif event.state & gtk.gdk.BUTTON1_MASK:
+        elif event.get_state() & Gdk.ModifierType.BUTTON1_MASK:
             for child in self.document.pages[0].children: # TODO
                 if child.selected:
                     target = Point()
@@ -264,7 +271,8 @@ class CanvasImplementation(BaseCanvas):
                         else:
                             child.transform(target.x, target.y)
                     else:
-                        widget.bin_window.set_cursor(gtk.gdk.Cursor(gtk.gdk.FLEUR))
+                        #widget.bin_window.set_cursor(Gdk.Cursor.new(Gdk.FLEUR))
+                        widget.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.FLEUR))
                         target.x = self.grid.nearest(x - child.offset.x)
                         target.y = self.grid.nearest(y - child.offset.y)
                         target = self.guides.nearest(target)
@@ -288,7 +296,7 @@ class CanvasImplementation(BaseCanvas):
         """
         This code is executed when you press the mouse button
         """
-        self.emit("focus", gtk.DIR_TAB_FORWARD)
+        self.emit("focus", Gtk.DirectionType.TAB_FORWARD)
 
         x = event.x / self.zoom
         y = event.y / self.zoom
@@ -310,6 +318,7 @@ class CanvasImplementation(BaseCanvas):
             self.unselect_all()
             #x, y = self.get_pointer()
             target = Point()
+            #child = self.get_child()
             child = self.child
             self.add(child)
             child.selected = True
@@ -324,7 +333,8 @@ class CanvasImplementation(BaseCanvas):
             child.handler.control[opposite(child.direction)].y = child.y
             child.handler.control[opposite(child.direction)].x = child.x
             start_resize(child)
-            widget.bin_window.set_cursor(gtk.gdk.Cursor(gtk.gdk.BOTTOM_RIGHT_CORNER))
+            #widget.bin_window.set_cursor(Gdk.Cursor.new(Gdk.BOTTOM_RIGHT_CORNER))
+            widget.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.BOTTOM_RIGHT_CORNER))
             self.emit("select", child)
             return True
 
@@ -336,7 +346,7 @@ class CanvasImplementation(BaseCanvas):
             child.press(x, y)
 
         def select(child):
-            if not event.state & gtk.gdk.CONTROL_MASK:
+            if not event.get_state() & Gdk.ModifierType.CONTROL_MASK:
                 self.unselect_all()
             child.selected = True
 
@@ -365,7 +375,8 @@ class CanvasImplementation(BaseCanvas):
             self.selection.width = 0
             self.selection.height = 0
             self.selection.active = True
-            widget.bin_window.set_cursor(gtk.gdk.Cursor(gtk.gdk.CROSSHAIR))
+            #widget.bin_window.set_cursor(Gdk.Cursor.new(Gdk.CursorType.CROSSHAIR))
+            widget.get_window().set_cursor(Gdk.Cursor.new(Gdk.CursorType.CROSSHAIR))
         else:
             self.stop_cursor_change = True
             #self.updated = False
@@ -373,12 +384,12 @@ class CanvasImplementation(BaseCanvas):
 
         return True
 
-    def expose(self, widget, event):
+    def expose(self, widget, context):
         self.statics.expose += 1
         self.disconnect(self.expose_id)
-        context = widget.bin_window.cairo_create()
-        context.rectangle(event.area.x, event.area.y, event.area.width, event.area.height)
-        context.clip()
+        #context = widget.bin_window.cairo_create()
+        #context.rectangle(event.area.x, event.area.y, event.area.width, event.area.height)
+        #context.clip()
         context.scale(self.zoom, self.zoom)
         self.total.width = int(self.document.pages[0].width * self.zoom + 2 * self.border)
         self.total.height = int(
@@ -412,7 +423,7 @@ class CanvasImplementation(BaseCanvas):
         if self.selection.active:
             self.selection.draw(context)
         self.updated = True
-        self.expose_id = self.connect("expose-event", self.expose)
+        self.expose_id = self.connect("draw", self.expose)
         return True
 
     add = lambda self, child: self.document.pages[0].children.append(child)
@@ -456,7 +467,9 @@ class ExtendedCanvas(CanvasImplementation):
     def create(self, child):
         self.stop_cursor_change = False
         self.pick = True
+        #self.get_child() = child
         self.child = child
+        #child = self.get_child()
         child.z = len(self.document.pages[0].children)
         #child.connect("changed", self.update, child)
 
@@ -651,7 +664,7 @@ class ExtendedCanvas(CanvasImplementation):
                         self.add(object)
 
         #def element_body(data):
-        #  print "data:", repr(data)
+        #  print("data:", repr(data))
 
         parser = xml.parsers.expat.ParserCreate()
 
@@ -684,6 +697,6 @@ class TestingCanvas(ExtendedCanvas):
     def __init__(self, application):
         ExtendedCanvas.__init__(self, application)
         self.is_testing = True
-        print _("WARNING: You are using a testing canvas.")
+        print(_("WARNING: You are using a testing canvas."))
 
 Canvas = TestingCanvas if "--testing" in sys.argv else ProductionCanvas

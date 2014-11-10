@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import NONE, HORIZONTAL, VERTICAL
 
-from control import Control
-from rectangle import Rectangle
-from objects import NONE, HORIZONTAL, VERTICAL
+from .control import Control
+from .rectangle import Rectangle
 
 class Separator(Rectangle):
     """This class represents a box separator"""

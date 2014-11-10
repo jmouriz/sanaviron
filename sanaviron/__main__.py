@@ -5,6 +5,7 @@
 Main Sanaviron
 """
 
+#from .sanaviron import *
 from sanaviron import *
 
 startapp()

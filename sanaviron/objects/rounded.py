@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
-from control import Control
-from object import Object
-from objects import *
+from .control import Control
+from .object import Object
 from math import pi
 import sys
-from gradient import Gradient
+from .gradient import Gradient
 
 class Rounded(Object):
     """This class represents a rounded box"""

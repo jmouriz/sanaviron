@@ -3,8 +3,8 @@
 
 import cairo
 
-from point import Point
-from magneto import Magneto
+from .point import Point
+from .magneto import Magneto
 from objects import NONE, CENTER, HORIZONTAL, VERTICAL, BOTH
 
 class Magnetos(list):

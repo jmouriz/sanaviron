@@ -3,7 +3,7 @@
 
 import cairo
 
-from rectangle import Rectangle
+from .rectangle import Rectangle
 
 class Selection(Rectangle):
     """This class represents a selection rectangle"""

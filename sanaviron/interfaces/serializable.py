@@ -34,7 +34,7 @@ class Property(dict):
         return self.value
 
     def serialize(self):
-        return "<property name=\"%s\" type=\"%s\" value=\"%s\"/>" % (self.name, self.type, self.value)
+        return u"<property name=\"%s\" type=\"%s\" value=\"%s\"/>" % (self.name, self.type, self.value)
 
 class Properties(dict):
     """This class represents a collection of properties"""
@@ -51,7 +51,7 @@ class Properties(dict):
     def serialize(self):
         representation = ""
         for property in self.values():
-            representation += "%s" % property.serialize()
+            representation += u"%s" % property.serialize()
         return representation
 
 class Holder(object):
@@ -97,9 +97,9 @@ class Serializable(Holder):
         Holder.__init__(self)
 
     def serialize(self):
-        representation = "<object type=\"%s\">" % self.__name__
+        representation = u"<object type=\"%s\">" % self.__name__
         representation += self.properties.serialize()
-        representation += "</object>"
+        representation += u"</object>"
         return representation
 
     def unserialize(self):

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from point import Point
+from .point import Point
 
 class Position(Point):
     """This class represents a position"""

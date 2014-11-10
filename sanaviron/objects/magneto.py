@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import NONE, HORIZONTAL, VERTICAL, BOTH
 
-import gtk.gdk
+from gi.repository import Gtk
 
-from point import Point
-from objects import NONE, HORIZONTAL, VERTICAL, BOTH
+from .point import Point
 
 class Magneto(Point):
     """This class represents a object magnetic line"""

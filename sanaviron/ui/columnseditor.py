@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import gtk
+from gi.repository import Gtk
+from gi.repository import GObject
 
 from interfaces.signalizable import Signalizable
 
@@ -8,54 +9,54 @@ COLUMN_TITLE = 0
 COLUMN_WIDTH = 1
 COLUMN_UNIT = 2
 
-class ColumnsEditor(gtk.ScrolledWindow, Signalizable):
+class ColumnsEditor(Gtk.ScrolledWindow, Signalizable):
     """This class represents a table columns editor"""
 
     def __init__(self):
-        gtk.ScrolledWindow.__init__(self)
+        GObject.GObject.__init__(self)
         Signalizable.__init__(self)
 
-        self.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        self.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
 
-        units = gtk.ListStore(str)
+        units = Gtk.ListStore(str)
         units.append([_("millimeters")])
         units.append([_("inches")])
         units.append([_("pixels")])
 
-        self.liststore = gtk.ListStore(str, int, str)
+        self.liststore = Gtk.ListStore(str, int, str)
 
-        treeview = gtk.TreeView(self.liststore)
+        treeview = Gtk.TreeView(self.liststore)
         treeview.set_size_request(-1, 100)
         treeview.set_rules_hint(True)
         treeview.set_grid_lines(True)
         self.add(treeview)
 
-        cell = gtk.CellRendererText()
+        cell = Gtk.CellRendererText()
         cell.connect("edited", self.title_edited)
         cell.set_property("editable", True)
-        column = gtk.TreeViewColumn(_("Title"))
+        column = Gtk.TreeViewColumn(_("Title"))
         column.pack_start(cell, True)
         column.set_attributes(cell, text=COLUMN_TITLE)
         treeview.append_column(column)
         treeview.set_search_column(COLUMN_TITLE)
 
-        adjustment = gtk.Adjustment(0, 0, 100, 1)
-        cell = gtk.CellRendererSpin()
+        adjustment = Gtk.Adjustment(0, 0, 100, 1)
+        cell = Gtk.CellRendererSpin()
         cell.connect("edited", self.width_edited)
         cell.set_property("editable", True)
         cell.set_property("adjustment", adjustment)
         cell.set_property("xalign", 1.0)
-        column = gtk.TreeViewColumn(_("Width"))
+        column = Gtk.TreeViewColumn(_("Width"))
         column.pack_start(cell, True)
         column.set_attributes(cell, text=COLUMN_WIDTH)
         treeview.append_column(column)
 
-        cell = gtk.CellRendererCombo()
+        cell = Gtk.CellRendererCombo()
         cell.set_property("editable", True)
         cell.set_property("has-entry", False)
         cell.set_property("model", units)
         cell.set_property("text-column", 0)
-        column = gtk.TreeViewColumn(_("Unit"))
+        column = Gtk.TreeViewColumn(_("Unit"))
         column.pack_start(cell, True)
         column.set_attributes(cell, text=COLUMN_UNIT)
         treeview.append_column(column)
@@ -92,10 +93,10 @@ class ColumnsEditor(gtk.ScrolledWindow, Signalizable):
 
 if __name__ == '__main__':
     def quit(widget, event):
-        gtk.main_quit()
+        Gtk.main_quit()
         return True
 
-    window = gtk.Window()
+    window = Gtk.Window()
     window.set_size_request(400, 200)
     window.set_title("Tabla de muestra")
     window.connect("delete-event", quit)
@@ -105,4 +106,4 @@ if __name__ == '__main__':
     columns_editor.add_column()
     window.add(columns_editor)
     window.show_all()
-    gtk.main()
+    Gtk.main()

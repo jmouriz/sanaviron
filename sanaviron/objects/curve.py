@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
-from object import Object
-from objects import *
-from control import Control
+from .object import Object
+from .control import Control
 
 class Curve(Object):
     """This class represents a curve"""

@@ -18,28 +18,28 @@
 import random
 import webbrowser
 
-import pygtk
+import gi
 
-pygtk.require('2.0')
-import gtk
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 
 
-class TextInputDialog(gtk.Dialog):
+class TextInputDialog(Gtk.Dialog):
     def __init__(self, toplevel_window, suggested_name):
-        flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT
-        buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
-                   gtk.STOCK_OK, gtk.RESPONSE_ACCEPT)
+        flags = Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT
+        buttons = (Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                   Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
         super(TextInputDialog, self).__init__(u'Enter a name for the dataset',
             toplevel_window, flags, buttons)
         self.set_default_size(300, -1)
 
-        hbox = gtk.HBox(spacing=6)
+        hbox = Gtk.HBox(spacing=6)
         hbox.set_border_width(12)
 
-        label = gtk.Label(u'Name')
+        label = Gtk.Label(label=u'Name')
         hbox.pack_start(label, False, False)
 
-        self.entry = gtk.Entry()
+        self.entry = Gtk.Entry()
         self.entry.set_text(suggested_name)
         self.entry.set_activates_default(True)
         hbox.pack_start(self.entry, True, True)
@@ -48,30 +48,30 @@ class TextInputDialog(gtk.Dialog):
 
         self.vbox.show_all()
 
-        self.set_default_response(gtk.RESPONSE_ACCEPT)
+        self.set_default_response(Gtk.ResponseType.ACCEPT)
 
     def get_name(self):
         return self.entry.get_text()
 
 
-class PointDialog(gtk.Dialog):
+class PointDialog(Gtk.Dialog):
     def __init__(self, toplevel_window, initial_x, initial_y):
-        flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT
-        buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
-                   gtk.STOCK_OK, gtk.RESPONSE_ACCEPT)
+        flags = Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT
+        buttons = (Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                   Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
         super(PointDialog, self).__init__(u'Enter the point values',
             toplevel_window, flags, buttons)
 
         initials = {u'x': str(initial_x), u'y': str(initial_y)}
         self.entries = {}
         for coordinate in (u'x', u'y'):
-            hbox = gtk.HBox(spacing=6)
+            hbox = Gtk.HBox(spacing=6)
             hbox.set_border_width(12)
 
-            label = gtk.Label(coordinate)
+            label = Gtk.Label(label=coordinate)
             hbox.pack_start(label, False, False)
 
-            entry = gtk.Entry()
+            entry = Gtk.Entry()
             entry.set_activates_default(True)
             entry.set_text(initials[coordinate])
             hbox.pack_start(entry, True, True)
@@ -82,28 +82,28 @@ class PointDialog(gtk.Dialog):
 
         self.vbox.show_all()
 
-        self.set_default_response(gtk.RESPONSE_ACCEPT)
+        self.set_default_response(Gtk.ResponseType.ACCEPT)
 
     def get_point(self):
         return (float(self.entries[u'x'].get_text()),
                 float(self.entries[u'y'].get_text()))
 
 
-class OptionDialog(gtk.Dialog):
+class OptionDialog(Gtk.Dialog):
     def __init__(self, toplevel_window, label, value, value_type):
-        flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT
-        buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
-                   gtk.STOCK_OK, gtk.RESPONSE_ACCEPT)
+        flags = Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT
+        buttons = (Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                   Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
         super(OptionDialog, self).__init__(u'Enter the option value',
             toplevel_window, flags, buttons)
 
-        hbox = gtk.HBox(spacing=6)
+        hbox = Gtk.HBox(spacing=6)
         hbox.set_border_width(12)
 
-        label = gtk.Label(label)
+        label = Gtk.Label(label=label)
         hbox.pack_start(label, False, False)
 
-        self.entry = gtk.Entry()
+        self.entry = Gtk.Entry()
         self.entry.set_text(value or '')
         self.entry.set_activates_default(True)
         hbox.pack_start(self.entry, True, True)
@@ -112,22 +112,22 @@ class OptionDialog(gtk.Dialog):
 
         self.vbox.show_all()
 
-        self.set_default_response(gtk.RESPONSE_ACCEPT)
+        self.set_default_response(Gtk.ResponseType.ACCEPT)
 
     def get_value(self):
         return self.entry.get_text()
 
 
-class RandomGeneratorDialog(gtk.Dialog):
+class RandomGeneratorDialog(Gtk.Dialog):
     def __init__(self, toplevel_window):
-        flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT
-        buttons = (gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
-                   gtk.STOCK_OK, gtk.RESPONSE_ACCEPT)
+        flags = Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT
+        buttons = (Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
+                   Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
         super(RandomGeneratorDialog, self).__init__(u'Points generation',
             toplevel_window,
             flags, buttons)
 
-        self.size_group = gtk.SizeGroup(gtk.SIZE_GROUP_HORIZONTAL)
+        self.size_group = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
 
         self.number = self._create_spin_button('Number of points to generate',
             0, 1, 5, 1, 1000, 10)
@@ -138,19 +138,19 @@ class RandomGeneratorDialog(gtk.Dialog):
 
         self.vbox.show_all()
 
-        self.set_default_response(gtk.RESPONSE_ACCEPT)
+        self.set_default_response(Gtk.ResponseType.ACCEPT)
 
     def _create_spin_button(self, label_text, digits, step, page,
                             min_value, max_value, value):
-        hbox = gtk.HBox(spacing=6)
+        hbox = Gtk.HBox(spacing=6)
         hbox.set_border_width(12)
 
-        label = gtk.Label(label_text)
+        label = Gtk.Label(label=label_text)
         label.set_alignment(1.0, 0.5)
         self.size_group.add_widget(label)
         hbox.pack_start(label, False, False)
 
-        spin_button = gtk.SpinButton(digits=digits)
+        spin_button = Gtk.SpinButton(digits=digits)
         spin_button.set_increments(step, page)
         spin_button.set_range(min_value, max_value)
         spin_button.set_value(value)
@@ -169,7 +169,7 @@ class RandomGeneratorDialog(gtk.Dialog):
         for x in range(n)]
 
 
-class AboutDialog(gtk.AboutDialog):
+class AboutDialog(Gtk.AboutDialog):
     def __init__(self, toplevel_window):
         super(AboutDialog, self).__init__()
         self.set_transient_for(toplevel_window)
@@ -189,12 +189,12 @@ class AboutDialog(gtk.AboutDialog):
 def url_handler(dialog, link, data=None):
     webbrowser.open(link)
 
-gtk.about_dialog_set_url_hook(url_handler)
+Gtk.about_dialog_set_url_hook(url_handler)
 
 
 def warning(window, msg):
-    dialog = gtk.MessageDialog(window,
-        gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-        gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, msg)
+    dialog = Gtk.MessageDialog(window,
+        Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+        Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, msg)
     dialog.run()
     dialog.destroy()

@@ -30,7 +30,7 @@ class Observer:
             else:
                 value = eval("object.%s" % property)
             if stored != value:
-                print "on object %s property %s has changed from %d to %d" % (name, property, stored, value)
+                print("on object %s property %s has changed from %d to %d" % (name, property, stored, value))
 
     def has_changed(self, name):
         object = self.observables[name]["object"]
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         if observer.has_changed(name):
             observer.monitorize(name)
         else:
-            print "nothing changed in %s" % name
+            print("nothing changed in %s" % name)
 
     print_changes("object")
     object.x = 10

@@ -1,20 +1,21 @@
 #!/usr/bin/python
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import gtk
+from gi.repository import Gtk
+from gi.repository import GObject
 
-class LayerSelector(gtk.HBox):
+class LayerSelector(Gtk.HBox):
     def __init__(self):
-        gtk.HBox.__init__(self)
+        GObject.GObject.__init__(self)
 
         self.set_spacing(6)
 
-        label = gtk.Label(_("Layer:"))
+        label = Gtk.Label(label=_("Layer:"))
         self.add(label)
 
-        alignment = gtk.Alignment(0.0, 0.5)
+        alignment = Gtk.Alignment.new(0.0, 0.5, 0.0, 0.0)
         self.add(alignment)
-        entry = gtk.combo_box_new_text()
+        entry = Gtk.ComboBoxText()
         #entry.connect("changed", self.changed_barcode_type)
         alignment.add(entry)
 
@@ -28,13 +29,13 @@ class LayerSelector(gtk.HBox):
 
 if __name__ == '__main__':
     def quit(widget, event):
-        gtk.main_quit()
+        Gtk.main_quit()
         return True
 
-    window = gtk.Window()
+    window = Gtk.Window()
     window.set_title(_("Layer selector"))
     window.connect("delete-event", quit)
     entry = LayerSelector()
     window.add(entry)
     window.show_all()
-    gtk.main()
+    Gtk.main()

@@ -1,17 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from arc import Arc
-from barcode import BarCode
-from box import Box
-from chart import Chart
-from curve import Curve
-from connector import Connector
-from image import Image
-from line import Line
-from rounded import Rounded
-from table import Table
-from text import Text
+from .arc import Arc
+from .barcode import BarCode
+from .box import Box
+from .chart import Chart
+from .curve import Curve
+from .connector import Connector
+from .image import Image
+from .line import Line
+from .rounded import Rounded
+from .table import Table
+from .text import Text
 
 class Shape(object):
     def __new__(self, shape):

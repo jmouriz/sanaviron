@@ -1,15 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-import gtk
+from gi.repository import Gtk
+from gi.repository import GObject
 
 from interfaces.signalizable import Signalizable
 
-class Options(gtk.VBox, Signalizable):
+class Options(Gtk.VBox, Signalizable):
     """This class represents a multiple radio options"""
 
     def __init__(self):
-        gtk.VBox.__init__(self)
+        GObject.GObject.__init__(self)
         Signalizable.__init__(self)
 
         self.options = list()
@@ -22,7 +22,7 @@ class Options(gtk.VBox, Signalizable):
             last = self.options[count - 1]
         else:
             last = None
-        option = gtk.RadioButton(last, caption)
+        option = Gtk.RadioButton(last, caption)
         option.connect("toggled", self.selected, count)
         self.options.append(option)
         self.add(option)

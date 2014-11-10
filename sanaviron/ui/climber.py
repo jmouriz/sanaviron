@@ -1,56 +1,57 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import gtk
+from gi.repository import Gtk
+from gi.repository import GObject
 
-class Climber(gtk.HBox):
+class Climber(Gtk.HBox):
     """This class represents a zoom toolset"""
 
     def __init__(self, canvas):
-        gtk.HBox.__init__(self)
+        GObject.GObject.__init__(self)
 
         self.canvas = canvas
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_ZOOM_OUT, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_ZOOM_OUT, Gtk.IconSize.MENU)
         button.connect("clicked", self.zoom_out)
         button.add(image)
 
-        self.button = gtk.Button('1.00 (100%)')
-        self.button.set_relief(gtk.RELIEF_NONE)
+        self.button = Gtk.Button('1.00 (100%)')
+        self.button.set_relief(Gtk.ReliefStyle.NONE)
         #self.button.connect("clicked", self.custom_zoom)
         self.add(self.button)
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_ZOOM_IN, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_ZOOM_IN, Gtk.IconSize.MENU)
         button.connect("clicked", self.zoom_in)
         button.add(image)
 
-        separator = gtk.VSeparator()
+        separator = Gtk.VSeparator()
         self.add(separator)
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_ZOOM_FIT, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_ZOOM_FIT, Gtk.IconSize.MENU)
         #button.connect("clicked", self.zoom_fit)
         button.add(image)
 
-        button = gtk.Button()
-        button.set_relief(gtk.RELIEF_NONE)
+        button = Gtk.Button()
+        button.set_relief(Gtk.ReliefStyle.NONE)
         self.add(button)
 
-        image = gtk.Image()
-        image.set_from_stock(gtk.STOCK_ZOOM_100, gtk.ICON_SIZE_MENU)
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_ZOOM_100, Gtk.IconSize.MENU)
         button.connect("clicked", self.zoom_normal)
         button.add(image)
 
@@ -71,9 +72,9 @@ class Climber(gtk.HBox):
         self.update()
 
 if __name__ == '__main__':
-    window = gtk.Window()
-    window.connect("delete-event", gtk.main_quit)
+    window = Gtk.Window()
+    window.connect("delete-event", Gtk.main_quit)
     climber = Climber()
     window.add(climber)
     window.show_all()
-    gtk.main()
+    Gtk.main()

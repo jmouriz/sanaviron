@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import NONE, HORIZONTAL, VERTICAL
 
-import gtk.gdk
+from gi.repository import Gtk
+from gi.repository import Gdk
 
-from rectangle import Rectangle
-from objects import NONE, HORIZONTAL, VERTICAL
+from .rectangle import Rectangle
 
 class Tag(Rectangle):
     """This class represents a ruler tag"""
@@ -54,7 +55,7 @@ class Tag(Rectangle):
         return position > self.position - 5 and position < self.position + 5
 
     def get_cursor(self):
-        return gtk.gdk.SB_H_DOUBLE_ARROW if self.orientation == HORIZONTAL else gtk.gdk.SB_V_DOUBLE_ARROW
+        return Gdk.SB_H_DOUBLE_ARROW if self.orientation == HORIZONTAL else Gdk.SB_V_DOUBLE_ARROW
 
     def move(self, position):
         self.position = position

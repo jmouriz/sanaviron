@@ -1,13 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
-import pango
-import pangocairo
-from object import Object
-from objects import *
-from control import Control
+from .object import Object
+from .control import Control
 
-import gtk
+from gi.repository import Gtk
+from gi.repository import Pango
+from gi.repository import PangoCairo
 
 class Table(Object):
     """This class represents a table"""
@@ -61,19 +61,20 @@ class Table(Object):
         self.width = 0
         self.height = 0
 
-        context = pangocairo.CairoContext(context) # XXX
+        #_context = PangoCairo.create_context(context) # XXX
         total_width = 0
 
         for column in range(n_columns):
             for row in range(rows):
-                layout = pangocairo.CairoContext.create_layout(context)
+                #layout = PangoCairo.create_layout(_context)
+                layout = PangoCairo.create_layout(context)
                 fontname = self.font
                 if fontname.endswith(("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")): # XXX
                     description = fontname
                 else:
                     size = int(self.size)
                     description = "%s %d" % (fontname, size)
-                font = pango.FontDescription(description)
+                font = Pango.FontDescription(description)
                 layout.set_font_description(font)
                 title = titles[column]
                 layout.set_markup(title)
@@ -86,18 +87,18 @@ class Table(Object):
                 width, height = layout.get_size()
 
                 if columns[column] == '0':
-                    width /= pango.SCALE
+                    width /= Pango.SCALE
                     columns[column] = str(width)
                 else:
                     width = int(columns[column])
 
-                height /= pango.SCALE
+                height /= Pango.SCALE
 
                 x = self.x + total_width + self.horizontal_spacing * column
                 y = self.y + (self.vertical_spacing + height) * row
 
                 context.move_to(x, y)
-                context.show_layout(layout)
+                PangoCairo.show_layout(context, layout)
 
             self.height = (self.vertical_spacing + height) * rows
 
@@ -109,7 +110,7 @@ class Table(Object):
         Object.draw(self, context)
 
     def get_cursor(self, direction):
-        return gtk.gdk.Cursor(gtk.gdk.FLEUR)
+        return Gdk.Cursor.new(Gdk.FLEUR)
 
     def transform(self, x, y):
         direction = self.direction - ANONIMOUS

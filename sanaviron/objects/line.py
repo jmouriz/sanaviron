@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
 import math
-from object import Object
-from point import Point
-from objects import *
+from .object import Object
+from .point import Point
 
 
 class Line(Object):

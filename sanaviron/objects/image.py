@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from .__init__ import *
 
 import os
 import cairo
-from object import Object
-from scale import Scale
-from objects import *
+from .object import Object
+from .scale import Scale
 
 class Image(Object):
     """This class represents a image"""
