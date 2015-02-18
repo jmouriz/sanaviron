@@ -29,3 +29,5 @@ And recently added features:
 
 * Python 3.4
 * GTK 3.x
+
+Official site: http://sanaviron.org
